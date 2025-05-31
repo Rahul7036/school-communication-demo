@@ -737,18 +737,25 @@
                 display: grid;
                 grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
                 gap: 10px; /* Reduced gap */
+                box-sizing: border-box; /* Ensure padding is included in element's total width and height */
+                width: 100%; /* Ensure it takes full width */
+                overflow: hidden; /* Hide overflowing content */
             }
 
             .dashboard-card > div:last-child > div {
                  text-align: center;
+                 padding: 5px; /* Added padding to the inner divs */
+                 word-break: break-word; /* Break long words */
             }
 
             .dashboard-card > div:last-child > div > div:first-child {
-                 font-size: 0.8rem; /* Smaller label font */
+                 font-size: 0.7rem; /* Further reduced label font size */
+                 white-space: normal; /* Allow label text to wrap */
+                 line-height: 1.2; /* Adjusted line height */
             }
 
             .dashboard-card > div:last-child > div > div:last-child {
-                 font-size: 1.2rem; /* Smaller value font */
+                 font-size: 1.1rem; /* Further reduced value font size */
             }
 
         }
@@ -791,7 +798,20 @@
              /* Further adjust analytics grid on very small screens */
             .dashboard-card > div:last-child {
                 grid-template-columns: 1fr; /* Stack analytics vertically on very small screens */
+                gap: 15px; /* Adjusted gap */
             }
+
+             .dashboard-card > div:last-child > div {
+                 text-align: left; /* Align text to left on vertical stack */
+             }
+
+              .dashboard-card > div:last-child > div > div:first-child {
+                 font-size: 0.8rem; /* Slightly larger label font on vertical stack */
+              }
+
+              .dashboard-card > div:last-child > div > div:last-child {
+                 font-size: 1.5rem; /* Slightly larger value font on vertical stack */
+              }
         }
 
         .feedback-section {
