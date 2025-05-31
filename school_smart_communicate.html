@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Communication System - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            margin: 30px 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide:nth-child(2) { animation-delay: 0.2s; }
+        .slide:nth-child(3) { animation-delay: 0.4s; }
+        .slide:nth-child(4) { animation-delay: 0.6s; }
+
+        .hero-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50px) translateY(-50px); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        .demo-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .slide-content {
+            padding: 50px;
+        }
+
+        .slide-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .slide-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .problem-box, .solution-box {
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+            border-left: 5px solid #e53e3e;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+            border-left: 5px solid #38a169;
+        }
+
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-demo {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-demo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .feature-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 15px;
+            padding-right: 40px;
+        }
+
+        .feature-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .demo-preview {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .demo-preview::before {
+            content: '💻 Demo Preview';
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: #2d3748;
+            padding: 0 10px;
+            font-size: 0.8rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .live-demo-section {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        .demo-interface {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .demo-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .demo-tab {
+            padding: 12px 24px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .demo-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .demo-content {
+            display: none;
+            text-align: left;
+        }
+
+        .demo-content.active {
+            display: block;
+        }
+
+        .demo-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .demo-input {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .demo-textarea {
+            grid-column: 1 / -1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            min-height: 100px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .demo-btn {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .results-panel {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 150px;
+        }
+
+        .benefits-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .benefit-desc {
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            margin-top: 50px;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 15px 30px;
+            border: 2px solid white;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn.primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .slide-content {
+                padding: 30px;
+            }
+            
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Hero Slide -->
+        <div class="slide hero-slide">
+            <div class="hero-content">
+                <div class="hero-badge">🚀 Live Demo Available</div>
+                <h1 class="hero-title">Smart School Communication System</h1>
+                <p class="hero-subtitle">Streamline Parent-School Communication with Automated Messaging</p>
+                <div class="demo-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Core Features</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Apps Required</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Mobile Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem & Solution -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-icon">🎯</div>
+                    <h2 class="slide-title">The Challenge Schools Face Today</h2>
+                </div>
+                <div class="problem-solution">
+                    <div class="problem-box">
+                        <h3 style="color: #c53030; margin-bottom: 20px;">❌ Current Problems</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Parents miss fee payment deadlines</li>
+                            <li>Students "forget" to tell homework</li>
+                            <li>PTM scheduling creates chaos</li>
+                            <li>Manual follow-ups waste time</li>
+                            <li>Communication gaps affect learning</li>
+                        </ul>
+                    </div>
+                    <div class="solution-box">
+                        <h3 style="color: #2f855a; margin-bottom: 20px;">✅ Our Solution</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Automated fee reminders</li>
+                            <li>Daily homework notifications</li>
+                            <li>Self-service meeting booking</li>
+                            <li>Zero manual intervention</li>
+                            <li>Direct parent engagement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Features -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-icon">⚡</div>
+                    <h2 class="slide-title">System Demo - Core Features</h2>
+                </div>
+                <div class="demo-features">
+                    <div class="feature-demo">
+                        <div class="feature-number">1</div>
+                        <h3 class="feature-title">Smart Fee Management</h3>
+                        <p class="feature-description">
+                            Upload parent data once. System automatically sends reminders before, on, and after due dates.
+                        </p>
+                        <div class="demo-preview">
+                            📊 Single Entry: Quick individual reminders<br>
+                            📋 Bulk Upload: CSV with 100s of students<br>
+                            📅 Auto-schedule: 7 days before, due date, 3 days after<br>
+                            ✅ Sample CSV provided for easy setup
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">2</div>
+                        <h3 class="feature-title">Instant Homework Alerts</h3>
+                        <p class="feature-description">
+                            Teachers type once, parents get complete homework list instantly. No more "I forgot my diary" excuses.
+                        </p>
+                        <div class="demo-preview">
+                            👩‍🏫 Teacher dashboard → Select Class 9B<br>
+                            📝 Type: "Math: Pg 42, Science: Lab report"<br>
+                            📱 Sent to all 30 parents instantly<br>
+                            ✅ 100% delivery confirmation
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">3</div>
+                        <h3 class="feature-title">Organized Meeting Booking</h3>
+                        <p class="feature-description">
+                            End PTM chaos. Parents book slots online, teachers get organized schedule automatically.
+                        </p>
+                        <div class="demo-preview">
+                            📅 Teacher sets: "Dec 5, 2-4 PM available"<br>
+                            📱 Parents receive booking link<br>
+                            🎯 Click → Select time → Auto-confirmed<br>
+                            📋 Teacher gets organized schedule
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Demo Interface -->
+        <div class="slide">
+            <div class="live-demo-section">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">🖥️ Try the Live Demo</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 30px;">Experience how easy it is to manage school communication</p>
+                
+                <div class="demo-interface">
+                    <div class="demo-tabs">
+                        <button class="demo-tab active" onclick="showDemo('fees')">Fee Management</button>
+                        <button class="demo-tab" onclick="showDemo('homework')">Homework Alert</button>
+                        <button class="demo-tab" onclick="showDemo('meeting')">Meeting Booking</button>
+                    </div>
+                    
+                    <div id="fees-demo" class="demo-content active">
+                        <h3 style="margin-bottom: 20px;">Fee Reminder System</h3>
+                        
+                        <!-- Toggle between Single and Bulk -->
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
+                            <button class="demo-tab active" onclick="toggleFeeMode('single')" id="single-tab">Single Entry</button>
+                            <button class="demo-tab" onclick="toggleFeeMode('bulk')" id="bulk-tab">Bulk Upload (CSV)</button>
+                        </div>
+                        
+                        <!-- Single Entry Form -->
+                        <div id="single-entry" class="fee-mode">
+                            <div class="demo-form">
+                                <input type="text" class="demo-input" placeholder="Student Name" value="Rajesh Kumar">
+                                <input type="text" class="demo-input" placeholder="Parent Phone" value="+91-9876543210">
+                                <input type="number" class="demo-input" placeholder="Fee Amount" value="2500">
+                                <input type="date" class="demo-input" placeholder="Due Date" value="2025-06-15">
+                            </div>
+                            <button class="demo-btn" onclick="simulateSingleFeeDemo()">Send Single Fee Reminder</button>
+                        </div>
+                        
+                        <!-- Bulk Upload Form -->
+                        <div id="bulk-entry" class="fee-mode" style="display: none;">
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                                <h4 style="margin-bottom: 10px; color: #495057;">📋 CSV Format Required:</h4>
+                                <div style="background: white; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.9rem;">
+                                    Student Name, Parent Phone, Fee Amount, Due Date<br>
+                                    Rajesh Kumar, +91-9876543210, 2500, 2025-06-15<br>
+                                    Priya Sharma, +91-9876543211, 3000, 2025-06-15<br>
+                                    Amit Patel, +91-9876543212, 2500, 2025-06-15
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
+                                <input type="file" accept=".csv" class="demo-input" style="flex: 1;">
+                                <button class="demo-btn" onclick="simulateBulkFeeDemo()" style="white-space: nowrap;">Process CSV</button>
+                            </div>
+                            <div style="text-align: center;">
+                                <button class="demo-btn" onclick="downloadSampleCSV()" style="background: #28a745;">Download Sample CSV</button>
+                            </div>
+                        </div>
+                        
+                        <div class="results-panel" id="fee-results">
+                            Choose Single Entry or Bulk Upload to see automated message previews
+                        </div>
+                    </div>
+                    
+                    <div id="homework-demo" class="demo-content">
+                        <h3 style="margin-bottom: 20px;">Daily Homework System</h3>
+                        <div class="demo-form">
+                            <select class="demo-input">
+                                <option>Class 9-B</option>
+                                <option>Class 10-A</option>
+                                <option>Class 8-C</option>
+                            </select>
+                            <input type="text" class="demo-input" placeholder="Date" value="June 1, 2025">
+                        </div>
+                        <textarea class="demo-textarea" placeholder="Enter homework for all subjects...">Math: Chapter 5, Exercise 5.2 (Problems 1-10)
+Science: Complete lab worksheet on Acids & Bases
+English: Essay on "Environmental Conservation" (200 words)
+Social: Read Chapter 8, answer questions 1-5</textarea>
+                        <button class="demo-btn" onclick="simulateHomeworkDemo()">Send to All Parents</button>
+                        <div class="results-panel" id="homework-results">
+                            Type homework and click "Send to All Parents" to see the message
+                        </div>
+                    </div>
+                    
+                    <div id="meeting-demo" class="demo-content">
+                        <h3 style="margin-bottom: 20px;">PTM Booking System</h3>
+                        <div class="demo-form">
+                            <input type="text" class="demo-input" placeholder="Teacher Name" value="Mrs. Priya Sharma">
+                            <input type="text" class="demo-input" placeholder="Subject" value="Mathematics">
+                            <input type="date" class="demo-input" placeholder="Meeting Date" value="2025-06-10">
+                            <input type="time" class="demo-input" placeholder="Start Time" value="14:00">
+                        </div>
+                        <button class="demo-btn" onclick="simulateMeetingDemo()">Create Booking Link</button>
+                        <div class="results-panel" id="meeting-results">
+                            Fill the details and click "Create Booking Link" to generate parent message
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Showcase -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-icon">🎉</div>
+                    <h2 class="slide-title">Immediate Benefits for Your School</h2>
+                </div>
+                <div class="benefits-showcase">
+                    <div class="benefit-card">
+                        <span class="benefit-icon">⏰</span>
+                        <h3 class="benefit-title">Save 5+ Hours Weekly</h3>
+                        <p class="benefit-desc">Eliminate manual calling and SMS sending</p>
+                    </div>
+                    <div class="benefit-card">
+                        <span class="benefit-icon">💰</span>
+                        <h3 class="benefit-title">Reduce Late Fees</h3>
+                        <p class="benefit-desc">Automated reminders improve collection by 40%</p>
+                    </div>
+                    <div class="benefit-card">
+                        <span class="benefit-icon">📚</span>
+                        <h3 class="benefit-title">Better Academic Results</h3>
+                        <p class="benefit-desc">Parents stay informed, students more accountable</p>
+                    </div>
+                    <div class="benefit-card">
+                        <span class="benefit-icon">👨‍👩‍👧‍👦</span>
+                        <h3 class="benefit-title">Higher Parent Satisfaction</h3>
+                        <p class="benefit-desc">Transparent communication builds trust</p>
+                    </div>
+                    <div class="benefit-card">
+                        <span class="benefit-icon">📱</span>
+                        <h3 class="benefit-title">Zero Learning Curve</h3>
+                        <p class="benefit-desc">Uses familiar messaging platform</p>
+                    </div>
+                    <div class="benefit-card">
+                        <span class="benefit-icon">🔧</span>
+                        <h3 class="benefit-title">Easy Setup</h3>
+                        <p class="benefit-desc">Live in 2 days, not 2 months</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Roadmap -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-icon">🚀</div>
+                    <h2 class="slide-title">Future Roadmap</h2>
+                </div>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px; color: #4a5568;">
+                    Exciting features coming soon to enhance your school's communication
+                </p>
+                <div class="demo-features">
+                    <div class="feature-demo">
+                        <div class="feature-number">🎂</div>
+                        <h3 class="feature-title">Birthday Wishes</h3>
+                        <p class="feature-description">
+                            Automated birthday greetings for students to create a more personal connection with families.
+                        </p>
+                        <div class="demo-preview">
+                            🎉 Personalized messages<br>
+                            📅 Auto-scheduled greetings<br>
+                            🎁 Optional gift suggestions<br>
+                            👨‍👩‍👧‍👦 Family engagement boost
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">🚫</div>
+                        <h3 class="feature-title">Absence Alerts</h3>
+                        <p class="feature-description">
+                            Instant notifications for student absence to ensure better attendance tracking and parent awareness.
+                        </p>
+                        <div class="demo-preview">
+                            ⚡ Real-time alerts<br>
+                            📱 Instant parent notification<br>
+                            📊 Attendance analytics<br>
+                            🔄 Auto-follow up system
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">📣</div>
+                        <h3 class="feature-title">Emergency Notices</h3>
+                        <p class="feature-description">
+                            One-click urgent announcements for critical school updates and emergency situations.
+                        </p>
+                        <div class="demo-preview">
+                            🚨 Priority messaging<br>
+                            📢 Bulk notifications<br>
+                            ✅ Delivery confirmation<br>
+                            📍 Location-based alerts
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">📊</div>
+                        <h3 class="feature-title">Report Card Summary</h3>
+                        <p class="feature-description">
+                            Digital report card notifications with detailed performance insights and improvement suggestions.
+                        </p>
+                        <div class="demo-preview">
+                            📈 Performance trends<br>
+                            📝 Subject-wise analysis<br>
+                            💡 Improvement tips<br>
+                            📱 Mobile-friendly view
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">🌐</div>
+                        <h3 class="feature-title">Multi-language Support</h3>
+                        <p class="feature-description">
+                            Support for regional languages to ensure effective communication with all parents.
+                        </p>
+                        <div class="demo-preview">
+                            🗣️ Multiple languages<br>
+                            🔄 Auto-translation<br>
+                            📱 Language preferences<br>
+                            🌍 Regional support
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">📈</div>
+                        <h3 class="feature-title">Analytics Dashboard</h3>
+                        <p class="feature-description">
+                            Detailed engagement insights to track communication effectiveness and parent participation.
+                        </p>
+                        <div class="demo-preview">
+                            📊 Engagement metrics<br>
+                            📈 Response rates<br>
+                            📱 Platform usage<br>
+                            📋 Custom reports
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="slide cta-section">
+            <h2 class="cta-title">Ready to See This in Your School?</h2>
+            <p class="cta-text">
+                Join the demo session and experience how this system can transform your school's communication.<br>
+                <strong>Free trial • No commitments • See results in 48 hours</strong>
+            </p>
+            <div class="cta-buttons">
+                <button class="cta-btn primary" onclick="requestDemo()">Schedule Live Demo</button>
+                <button class="cta-btn secondary" onclick="getQuote()">Get Custom Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Modal for Demo Request -->
+    <div id="demoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="background: white; width: 90%; max-width: 500px; margin: 50px auto; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+            <h2 style="margin-bottom: 20px; color: #2d3748;">Request Live Demo</h2>
+            <form id="demoRequestForm" onsubmit="submitDemoRequest(event)">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">School Name</label>
+                    <input type="text" id="schoolName" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Contact Person Name</label>
+                    <input type="text" id="contactName" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Phone Number</label>
+                    <input type="tel" id="contactPhone" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Email</label>
+                    <input type="email" id="contactEmail" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Number of Students</label>
+                    <input type="number" id="studentCount" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" onclick="closeDemoModal()" style="padding: 10px 20px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer;">Cancel</button>
+                    <button type="submit" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer;">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showDemo(demoType) {
+            // Hide all demo contents
+            document.querySelectorAll('.demo-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.demo-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected demo
+            document.getElementById(demoType + '-demo').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function toggleFeeMode(mode) {
+            const singleEntry = document.getElementById('single-entry');
+            const bulkEntry = document.getElementById('bulk-entry');
+            const singleTab = document.getElementById('single-tab');
+            const bulkTab = document.getElementById('bulk-tab');
+            
+            if (mode === 'single') {
+                singleEntry.style.display = 'block';
+                bulkEntry.style.display = 'none';
+                singleTab.classList.add('active');
+                bulkTab.classList.remove('active');
+            } else {
+                singleEntry.style.display = 'none';
+                bulkEntry.style.display = 'block';
+                singleTab.classList.remove('active');
+                bulkTab.classList.add('active');
+            }
+            
+            // Clear results when switching modes
+            document.getElementById('fee-results').innerHTML = 
+                mode === 'single' ? 
+                'Fill the form and click "Send Single Fee Reminder" to see the message preview' :
+                'Upload CSV or download sample to see bulk processing preview';
+        }
+
+        function simulateSingleFeeDemo() {
+            const result = document.getElementById('fee-results');
+            result.innerHTML = `
+                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Single Fee Reminder Sent!</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
+                    <strong>To:</strong> +91-9876543210<br><br>
+                    <strong>Message:</strong><br>
+                    "Dear Parent,<br>
+                    Fee payment of ₹2,500 for Rajesh Kumar is due by June 15, 2025.<br>
+                    Pay online: [Payment Link]<br>
+                    Please ignore if already paid.<br>
+                    - ABC School"
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                    📅 Auto-reminders scheduled: June 8 (7 days before) & June 18 (3 days after)
+                </p>
+            `;
+        }
+
+        function simulateBulkFeeDemo() {
+            const result = document.getElementById('fee-results');
+            result.innerHTML = `
+                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ CSV Processed Successfully!</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
+                    <strong>📊 Processing Summary:</strong><br>
+                    • Total Records: 150 students<br>
+                    • Valid Entries: 148 students<br>
+                    • Invalid Entries: 2 (missing phone numbers)<br><br>
+                    <strong>📅 Reminders Scheduled:</strong><br>
+                    • 148 × 3 = 444 total messages<br>
+                    • June 8: 148 "7-day reminders"<br>
+                    • June 15: 148 "due date reminders"<br>
+                    • June 18: 148 "final notices"<br><br>
+                    <strong>💰 Fee Collection Target:</strong> ₹3,70,000
+                </div>
+                <div style="background: #fff3cd; padding: 10px; border-radius: 4px; margin-top: 10px; border-left: 4px solid #ffc107;">
+                    <strong>⚠️ Validation Errors:</strong><br>
+                    Row 15: Invalid phone number format<br>
+                    Row 47: Missing due date
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                    ⏱️ Processing time: 2.3 seconds • All messages queued for delivery
+                </p>
+            `;
+        }
+
+        function downloadSampleCSV() {
+            const csvContent = `Student Name,Parent Phone,Fee Amount,Due Date
+Rajesh Kumar,+91-9876543210,2500,2025-06-15
+Priya Sharma,+91-9876543221,3000,2025-06-15
+Amit Patel,+91-9876543232,2500,2025-06-15
+Sneha Reddy,+91-9876543243,2800,2025-06-15
+Rohit Singh,+91-9876543254,2500,2025-06-15`;
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'fee_reminders_sample.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Show feedback
+            alert('📋 Sample CSV downloaded!\n\n✅ Open in Excel or Google Sheets\n📝 Replace with your student data\n💾 Save as CSV format\n📤 Upload back to system');
+        }
+
+        function simulateFeDemo() {
+            // This function is kept for backward compatibility
+            simulateSingleFeeDemo();
+        }
+
+        function simulateHomeworkDemo() {
+            const result = document.getElementById('homework-results');
+            result.innerHTML = `
+                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Sent to 28 Parents in Class 9-B</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
+                    <strong>Homework for Class 9-B - June 1, 2025</strong><br><br>
+                    📘 <strong>Math:</strong> Chapter 5, Exercise 5.2 (Problems 1-10)<br>
+                    🔬 <strong>Science:</strong> Complete lab worksheet on Acids & Bases<br>
+                    ✍️ <strong>English:</strong> Essay on "Environmental Conservation" (200 words)<br>
+                    🌍 <strong>Social:</strong> Read Chapter 8, answer questions 1-5<br><br>
+                    <em>- Mrs. Priya (Class Teacher)</em>
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                    📊 Delivery Status: 28 delivered, 0 failed • Sent in 3.2 seconds
+                </p>
+            `;
+        }
+
+        function simulateMeetingDemo() {
+            const result = document.getElementById('meeting-results');
+            result.innerHTML = `
+                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Booking Link Created & Sent!</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
+                    <strong>Message sent to all parents:</strong><br><br>
+                    "Parent-Teacher Meeting with Mrs. Priya Sharma (Mathematics)<br>
+                    📅 Date: June 10, 2025<br>
+                    🕐 Time: 2:00 PM onwards<br><br>
+                    Book your 10-minute slot: [Booking Link]<br>
+                    First come, first served basis.<br><br>
+                    - ABC School Administration"
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                    🔗 Booking Link: https://school-meet.com/book/priya-math-june10<br>
+                    📊 Available Slots: 12 (10 mins each)
+                </p>
+            `;
+        }
+
+        function requestDemo() {
+            document.getElementById('demoModal').style.display = 'block';
+        }
+
+        function closeDemoModal() {
+            document.getElementById('demoModal').style.display = 'none';
+        }
+
+        function submitDemoRequest(event) {
+            event.preventDefault();
+            
+            const schoolName = document.getElementById('schoolName').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const studentCount = document.getElementById('studentCount').value;
+
+            // Create message for WhatsApp
+            const message = `New Demo Request:\n\nSchool: ${schoolName}\nContact: ${contactName}\nPhone: ${contactPhone}\nEmail: ${contactEmail}\nStudents: ${studentCount}`;
+            
+            // Create WhatsApp link
+            const whatsappLink = `https://wa.me/917036771268?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappLink, '_blank');
+            
+            // Close modal and show confirmation
+            closeDemoModal();
+            alert('Thank you for your interest! We will contact you shortly.');
+            
+            // Reset form
+            document.getElementById('demoRequestForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('demoModal');
+            if (event.target == modal) {
+                closeDemoModal();
+            }
+        }
+
+        // Add smooth scrolling animation on page load
+        window.addEventListener('load', function() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                slide.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+</html>
