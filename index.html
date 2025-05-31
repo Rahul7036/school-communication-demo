@@ -735,27 +735,30 @@
              /* Fee Collection Analytics grid */
             .dashboard-card > div:last-child {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
-                gap: 10px; /* Reduced gap */
-                box-sizing: border-box; /* Ensure padding is included in element's total width and height */
-                width: 100%; /* Ensure it takes full width */
-                overflow: hidden; /* Hide overflowing content */
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); /* Use auto-fit and minmax for flexible columns */
+                gap: 5px; /* Reduced gap */
+                box-sizing: border-box;
+                width: 100%;
+                overflow: hidden;
             }
 
             .dashboard-card > div:last-child > div {
                  text-align: center;
-                 padding: 5px; /* Added padding to the inner divs */
-                 word-break: break-word; /* Break long words */
+                 padding: 3px; /* Further reduced padding */
+                 word-break: break-word;
             }
 
             .dashboard-card > div:last-child > div > div:first-child {
-                 font-size: 0.7rem; /* Further reduced label font size */
-                 white-space: normal; /* Allow label text to wrap */
-                 line-height: 1.2; /* Adjusted line height */
+                 font-size: 0.65rem; /* Further reduced label font size */
+                 white-space: normal;
+                 line-height: 1.2;
+                 color: #4a5568; /* Ensure consistent label color */
             }
 
             .dashboard-card > div:last-child > div > div:last-child {
-                 font-size: 1.1rem; /* Further reduced value font size */
+                 font-size: 1rem; /* Further reduced value font size */
+                 font-weight: bold; /* Ensure value is bold */
+                 color: #2d3748; /* Ensure consistent value color */
             }
 
         }
