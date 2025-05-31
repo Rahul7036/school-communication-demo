@@ -47,10 +47,10 @@
         .slide:nth-child(4) { animation-delay: 0.6s; }
 
         .hero-slide {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
             color: white;
             text-align: center;
-            padding: 80px 40px;
+            padding: 100px 40px;
             position: relative;
             overflow: hidden;
         }
@@ -81,45 +81,72 @@
             font-weight: bold;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
             font-size: 1.4rem;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-badge {
             background: rgba(255,255,255,0.2);
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 12px 24px;
+            border-radius: 30px;
             display: inline-block;
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
             font-weight: 600;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            animation: pulse 2s infinite;
         }
 
-        .demo-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
-        .stat-item {
-            text-align: center;
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            padding: 0 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
-            display: block;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         .slide-content {
@@ -440,16 +467,109 @@
             transform: scale(1.05);
         }
 
+        .benefit-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 80px 0;
+            margin: 40px 0;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: #4299e1;
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2b6cb0;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefit-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .benefit-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .benefit-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .slide-content {
-                padding: 30px;
+                padding: 20px;
             }
             
             .problem-solution {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .demo-features {
                 grid-template-columns: 1fr;
             }
             
@@ -457,33 +577,414 @@
                 grid-template-columns: 1fr;
             }
             
-            .demo-stats {
+            .demo-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .demo-tab {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .cta-buttons {
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
+            }
+            
+            .cta-btn {
+                width: 100%;
+            }
+            
+            .feedback-form {
+                padding: 20px;
+            }
+            
+            .slide-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .slide-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-card {
+                margin-bottom: 10px;
+            }
+            
+            .slide-title {
+                font-size: 1.8rem;
+            }
+            
+            .benefit-card {
+                padding: 20px;
+            }
+            
+            .demo-preview {
+                font-size: 0.8rem;
+                padding: 15px;
+            }
+        }
+
+        .feedback-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            padding: 80px 0;
+            margin: 40px 0;
+            color: white;
+        }
+
+        .feedback-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feedback-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .form-input:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+            background: white;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4299e1 0%, #2b6cb0 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .whatsapp-icon {
+            font-size: 1.2rem;
+        }
+
+        .roi-calculator {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .roi-input {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .roi-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .roi-result {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .success-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .roi-input {
+                flex-direction: column;
+            }
+            
+            .roi-input input {
+                width: 100%;
+            }
+            
+            .success-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dashboard-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 40px 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .dashboard-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin: 10px 0;
+        }
+
+        .dashboard-trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #48bb78;
+            font-size: 0.9rem;
+        }
+
+        .dashboard-trend.negative {
+            color: #e53e3e;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4299e1, #667eea);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .fee-list {
+            margin-top: 15px;
+        }
+
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .fee-item:last-child {
+            border-bottom: none;
+        }
+
+        .fee-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-paid {
+            background: #c6f6d5;
+            color: #2f855a;
+        }
+
+        .status-pending {
+            background: #fefcbf;
+            color: #975a16;
+        }
+
+        .status-overdue {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Hero Slide -->
+        <!-- Enhanced Hero Slide -->
         <div class="slide hero-slide">
             <div class="hero-content">
-                <div class="hero-badge">🚀 Live Demo Available</div>
+                <div class="hero-badge">🚀 Modernize Your School Communication</div>
                 <h1 class="hero-title">Smart School Communication System</h1>
-                <p class="hero-subtitle">Streamline Parent-School Communication with Automated Messaging</p>
-                <div class="demo-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">3</span>
-                        <span class="stat-label">Core Features</span>
+                <p class="hero-subtitle">Transform Your School's Communication & Attract More Students with Our Modern, Automated Solution</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">More Student Enrollment</div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">0</span>
-                        <span class="stat-label">Apps Required</span>
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Parent Satisfaction</div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Mobile Ready</span>
+                    <div class="stat-card">
+                        <div class="stat-number">5hrs</div>
+                        <div class="stat-label">Time Saved Weekly</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Digital Ready</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- School Benefits Section -->
+        <div class="benefit-section">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-icon">🎯</div>
+                    <h2 class="slide-title">How This System Helps Your School</h2>
+                </div>
+                
+                <div class="benefit-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📈</div>
+                        <h3 class="benefit-title">Increase Student Enrollment</h3>
+                        <ul class="benefit-list">
+                            <li>Modern communication attracts tech-savvy parents</li>
+                            <li>Digital-first approach appeals to new generation</li>
+                            <li>Professional image enhances school reputation</li>
+                            <li>Easy parent engagement increases satisfaction</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💰</div>
+                        <h3 class="benefit-title">Better Fee Collection</h3>
+                        <ul class="benefit-list">
+                            <li>Automated reminders improve collection rates</li>
+                            <li>Digital payment options increase convenience</li>
+                            <li>Reduced manual follow-up saves time</li>
+                            <li>Better cash flow management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📚</div>
+                        <h3 class="benefit-title">Enhanced Academic Performance</h3>
+                        <ul class="benefit-list">
+                            <li>Regular homework updates improve completion</li>
+                            <li>Better parent-teacher communication</li>
+                            <li>Timely feedback on student progress</li>
+                            <li>Increased student accountability</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎓</div>
+                        <h3 class="benefit-title">Modern School Image</h3>
+                        <ul class="benefit-list">
+                            <li>Digital transformation leadership</li>
+                            <li>Tech-savvy school reputation</li>
+                            <li>Competitive advantage in admissions</li>
+                            <li>Future-ready education approach</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -793,16 +1294,72 @@ Social: Read Chapter 8, answer questions 1-5</textarea>
                     </div>
                     
                     <div class="feature-demo">
-                        <div class="feature-number">📈</div>
-                        <h3 class="feature-title">Analytics Dashboard</h3>
+                        <div class="feature-number">🎯</div>
+                        <h3 class="feature-title">AI-Powered Insights</h3>
                         <p class="feature-description">
-                            Detailed engagement insights to track communication effectiveness and parent participation.
+                            Smart analytics and predictions to improve student performance and school operations.
                         </p>
                         <div class="demo-preview">
-                            📊 Engagement metrics<br>
-                            📈 Response rates<br>
-                            📱 Platform usage<br>
-                            📋 Custom reports
+                            📊 Performance predictions<br>
+                            🎯 Personalized recommendations<br>
+                            📈 Trend analysis<br>
+                            🔮 Future performance insights
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">🎨</div>
+                        <h3 class="feature-title">Custom Branding</h3>
+                        <p class="feature-description">
+                            School-specific branding and customization options for a unique identity.
+                        </p>
+                        <div class="demo-preview">
+                            🎨 Custom themes<br>
+                            📱 School app branding<br>
+                            🎯 Personalized templates<br>
+                            🌈 Brand color schemes
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">🤖</div>
+                        <h3 class="feature-title">AI Chat Assistant</h3>
+                        <p class="feature-description">
+                            24/7 automated support for common queries and information requests.
+                        </p>
+                        <div class="demo-preview">
+                            💬 Instant responses<br>
+                            📚 FAQ automation<br>
+                            🎯 Smart routing<br>
+                            📊 Query analytics
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">📱</div>
+                        <h3 class="feature-title">Mobile App</h3>
+                        <p class="feature-description">
+                            Dedicated mobile applications for schools, teachers, and parents.
+                        </p>
+                        <div class="demo-preview">
+                            📱 iOS & Android apps<br>
+                            🔔 Push notifications<br>
+                            📊 Offline access<br>
+                            🔐 Secure login
+                        </div>
+                    </div>
+                    
+                    <div class="feature-demo">
+                        <div class="feature-number">🎓</div>
+                        <h3 class="feature-title">Virtual Classroom</h3>
+                        <p class="feature-description">
+                            Integrated video conferencing and online learning tools.
+                        </p>
+                        <div class="demo-preview">
+                            🎥 Live classes<br>
+                            📝 Digital whiteboard<br>
+                            📚 Resource sharing<br>
+                            📊 Attendance tracking
                         </div>
                     </div>
                 </div>
@@ -819,6 +1376,176 @@ Social: Read Chapter 8, answer questions 1-5</textarea>
             <div class="cta-buttons">
                 <button class="cta-btn primary" onclick="requestDemo()">Schedule Live Demo</button>
                 <button class="cta-btn secondary" onclick="getQuote()">Get Custom Quote</button>
+            </div>
+        </div>
+
+        <!-- Feedback Form Section -->
+        <div class="slide feedback-section">
+            <div class="feedback-container">
+                <div class="slide-header" style="text-align: center; margin-bottom: 40px;">
+                    <div class="slide-icon" style="font-size: 3rem; margin-bottom: 20px;">💬</div>
+                    <h2 class="slide-title" style="color: white;">Get Started Today</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+                        Transform your school's communication system and join the digital education revolution
+                    </p>
+                </div>
+                
+                <div class="feedback-form">
+                    <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                        <div class="form-group">
+                            <label class="form-label">School Name</label>
+                            <input type="text" class="form-input" id="schoolName" required placeholder="Enter your school name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contact Person</label>
+                            <input type="text" class="form-input" id="contactName" required placeholder="Enter contact person name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="contactPhone" required placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" id="contactEmail" required placeholder="Enter email address">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Number of Students</label>
+                            <input type="number" class="form-input" id="studentCount" required placeholder="Enter total number of students">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-input form-textarea" id="message" required placeholder="Tell us about your school's needs and challenges"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span class="whatsapp-icon">📱</span>
+                            Send Message via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add after Demo Features section -->
+        <div class="slide dashboard-section">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-icon">💰</div>
+                    <h2 class="slide-title">Smart Financial Dashboard</h2>
+                </div>
+                <p style="text-align: center; margin-bottom: 30px; color: #4a5568;">
+                    Complete fee tracking and financial insights for better school management
+                </p>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">Total Fee Collection</div>
+                            <div class="dashboard-trend">↑ 15% vs last month</div>
+                        </div>
+                        <div class="dashboard-value">₹8,45,000</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: #4a5568; font-size: 0.9rem;">
+                            <span>Target: ₹10,00,000</span>
+                            <span>85% Collected</span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">Pending Payments</div>
+                            <div class="dashboard-trend negative">↑ 5% vs last month</div>
+                        </div>
+                        <div class="dashboard-value">₹1,55,000</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 15%"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: #4a5568; font-size: 0.9rem;">
+                            <span>Total Pending</span>
+                            <span>15% Outstanding</span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">Collection Efficiency</div>
+                            <div class="dashboard-trend">↑ 8% vs last month</div>
+                        </div>
+                        <div class="dashboard-value">92%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 92%"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: #4a5568; font-size: 0.9rem;">
+                            <span>On-time Payments</span>
+                            <span>92% Success Rate</span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">Recent Transactions</div>
+                            <div class="dashboard-trend">Last 7 days</div>
+                        </div>
+                        <div class="fee-list">
+                            <div class="fee-item">
+                                <div>
+                                    <div style="font-weight: 500;">Rajesh Kumar</div>
+                                    <div style="font-size: 0.9rem; color: #4a5568;">Class 9-B</div>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">₹25,000</div>
+                                    <div class="fee-status status-paid">Paid</div>
+                                </div>
+                            </div>
+                            <div class="fee-item">
+                                <div>
+                                    <div style="font-weight: 500;">Priya Sharma</div>
+                                    <div style="font-size: 0.9rem; color: #4a5568;">Class 10-A</div>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">₹28,000</div>
+                                    <div class="fee-status status-pending">Pending</div>
+                                </div>
+                            </div>
+                            <div class="fee-item">
+                                <div>
+                                    <div style="font-weight: 500;">Amit Patel</div>
+                                    <div style="font-size: 0.9rem; color: #4a5568;">Class 8-C</div>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">₹22,000</div>
+                                    <div class="fee-status status-overdue">Overdue</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card" style="margin-top: 30px;">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Fee Collection Analytics</div>
+                        <div class="dashboard-trend">Monthly Overview</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 20px;">
+                        <div>
+                            <div style="font-size: 0.9rem; color: #4a5568;">Total Students</div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">450</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.9rem; color: #4a5568;">Paid Students</div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">382</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.9rem; color: #4a5568;">Pending Students</div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">45</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.9rem; color: #4a5568;">Overdue Students</div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">23</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1058,6 +1785,32 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
                 slide.style.animationDelay = `${index * 0.2}s`;
             });
         });
+
+        function submitFeedback(event) {
+            event.preventDefault();
+            
+            const schoolName = document.getElementById('schoolName').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const studentCount = document.getElementById('studentCount').value;
+            const message = document.getElementById('message').value;
+
+            // Create WhatsApp message
+            const whatsappMessage = `New School Inquiry:\n\nSchool: ${schoolName}\nContact: ${contactName}\nPhone: ${contactPhone}\nEmail: ${contactEmail}\nStudents: ${studentCount}\n\nMessage:\n${message}`;
+            
+            // Create WhatsApp link
+            const whatsappLink = `https://wa.me/917036771268?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Open WhatsApp
+            window.open(whatsappLink, '_blank');
+            
+            // Reset form
+            document.getElementById('feedbackForm').reset();
+            
+            // Show confirmation
+            alert('Thank you for your interest! We will contact you shortly.');
+        }
     </script>
 </body>
 </html>
