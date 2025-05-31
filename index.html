@@ -665,7 +665,45 @@
             }
 
             .dashboard-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Stack dashboard cards vertically */
+                gap: 20px;
+            }
+
+            .dashboard-card {
+                 padding: 15px; /* Reduced padding for cards */
+            }
+
+            .dashboard-header {
+                 flex-direction: column;
+                 align-items: flex-start;
+                 margin-bottom: 15px;
+            }
+
+            .dashboard-title {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .dashboard-trend {
+                 font-size: 0.8rem;
+            }
+
+            .dashboard-value {
+                font-size: 1.8rem;
+            }
+
+            .fee-item {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .fee-item > div:first-child {
+                 flex-grow: 1;
+            }
+
+            .fee-status {
+                font-size: 0.7rem;
+                padding: 3px 6px;
             }
 
             .roi-input {
@@ -693,6 +731,25 @@
                  font-size: 0.9rem; /* Smaller font for textarea on mobile */
                  padding: 10px;
              }
+
+             /* Fee Collection Analytics grid */
+            .dashboard-card > div:last-child {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+                gap: 10px; /* Reduced gap */
+            }
+
+            .dashboard-card > div:last-child > div {
+                 text-align: center;
+            }
+
+            .dashboard-card > div:last-child > div > div:first-child {
+                 font-size: 0.8rem; /* Smaller label font */
+            }
+
+            .dashboard-card > div:last-child > div > div:last-child {
+                 font-size: 1.2rem; /* Smaller value font */
+            }
 
         }
 
@@ -730,6 +787,11 @@
                  font-size: 0.9rem; /* Slightly smaller font for buttons on very small screens */
                  padding: 12px 15px;
              }
+
+             /* Further adjust analytics grid on very small screens */
+            .dashboard-card > div:last-child {
+                grid-template-columns: 1fr; /* Stack analytics vertically on very small screens */
+            }
         }
 
         .feedback-section {
