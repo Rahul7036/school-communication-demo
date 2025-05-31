@@ -612,11 +612,24 @@
             
             .demo-tabs {
                 flex-wrap: wrap;
+                gap: 5px;
             }
             
             .demo-tab {
                 width: 100%;
-                margin-bottom: 10px;
+                margin-bottom: 5px;
+                min-width: unset;
+            }
+
+            .fee-mode .demo-tabs {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .fee-mode .demo-tab {
+                 width: auto;
+                 flex-grow: 1;
+                 min-width: unset;
             }
             
             .cta-buttons {
@@ -626,6 +639,9 @@
             
             .cta-btn {
                 width: 100%;
+                max-width: unset;
+                padding: 15px 20px;
+                white-space: normal;
             }
             
             .feedback-form {
@@ -640,6 +656,26 @@
             .slide-icon {
                 margin-right: 0;
                 margin-bottom: 15px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-input {
+                flex-direction: column;
+            }
+            
+            .roi-input input {
+                width: 100%;
+            }
+            
+            .success-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-interface {
+                padding: 20px;
             }
         }
 
