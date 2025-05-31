@@ -992,9 +992,9 @@
                         <h3 class="benefit-title">Better Fee Collection</h3>
                         <ul class="benefit-list">
                             <li>Automated reminders improve collection rates</li>
-                            <li>Digital payment options increase convenience</li>
                             <li>Reduced manual follow-up saves time</li>
                             <li>Better cash flow management</li>
+                            <li>Real-time payment tracking</li>
                         </ul>
                     </div>
                     
@@ -1138,14 +1138,14 @@
                                 <input type="number" class="demo-input" placeholder="Fee Amount" value="2500">
                                 <input type="date" class="demo-input" placeholder="Due Date" value="2025-06-15">
                             </div>
-                            <button class="demo-btn" onclick="simulateSingleFeeDemo()">Send Single Fee Reminder</button>
+                            <button class="demo-btn" onclick="simulateSingleFeeDemo()">Send Fee Reminder</button>
                         </div>
                         
                         <!-- Bulk Upload Form -->
                         <div id="bulk-entry" class="fee-mode" style="display: none;">
                             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
                                 <h4 style="margin-bottom: 10px; color: #495057;">📋 CSV Format Required:</h4>
-                                <div style="background: white; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.9rem;">
+                                <div style="background: white; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; overflow-x: auto;">
                                     Student Name, Parent Phone, Fee Amount, Due Date<br>
                                     Rajesh Kumar, +91-9876543210, 2500, 2025-06-15<br>
                                     Priya Sharma, +91-9876543211, 3000, 2025-06-15<br>
@@ -1654,25 +1654,36 @@ Social: Read Chapter 8, answer questions 1-5</textarea>
             // Clear results when switching modes
             document.getElementById('fee-results').innerHTML = 
                 mode === 'single' ? 
-                'Fill the form and click "Send Single Fee Reminder" to see the message preview' :
+                'Fill the form and click "Send Fee Reminder" to see the message preview' :
                 'Upload CSV or download sample to see bulk processing preview';
         }
 
         function simulateSingleFeeDemo() {
             const result = document.getElementById('fee-results');
+            const studentName = document.querySelector('#single-entry input[placeholder="Student Name"]').value;
+            const parentPhone = document.querySelector('#single-entry input[placeholder="Parent Phone"]').value;
+            const feeAmount = document.querySelector('#single-entry input[placeholder="Fee Amount"]').value;
+            const dueDate = document.querySelector('#single-entry input[placeholder="Due Date"]').value;
+            
+            const formattedDate = new Date(dueDate).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
             result.innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Single Fee Reminder Sent!</h4>
+                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Fee Reminder Sent!</h4>
                 <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>To:</strong> +91-9876543210<br><br>
+                    <strong>To:</strong> ${parentPhone}<br><br>
                     <strong>Message:</strong><br>
                     "Dear Parent,<br>
-                    Fee payment of ₹2,500 for Rajesh Kumar is due by June 15, 2025.<br>
-                    Pay online: [Payment Link]<br>
+                    Fee payment of ₹${feeAmount} for ${studentName} is due by ${formattedDate}.<br>
+                    Please ensure timely payment.<br>
                     Please ignore if already paid.<br>
                     - ABC School"
                 </div>
                 <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
-                    📅 Auto-reminders scheduled: June 8 (7 days before) & June 18 (3 days after)
+                    📅 Auto-reminders scheduled: 7 days before & 3 days after due date
                 </p>
             `;
         }
@@ -1688,9 +1699,9 @@ Social: Read Chapter 8, answer questions 1-5</textarea>
                     • Invalid Entries: 2 (missing phone numbers)<br><br>
                     <strong>📅 Reminders Scheduled:</strong><br>
                     • 148 × 3 = 444 total messages<br>
-                    • June 8: 148 "7-day reminders"<br>
-                    • June 15: 148 "due date reminders"<br>
-                    • June 18: 148 "final notices"<br><br>
+                    • 7 days before due date: 148 reminders<br>
+                    • Due date: 148 reminders<br>
+                    • 3 days after: 148 final notices<br><br>
                     <strong>💰 Fee Collection Target:</strong> ₹3,70,000
                 </div>
                 <div style="background: #fff3cd; padding: 10px; border-radius: 4px; margin-top: 10px; border-left: 4px solid #ffc107;">
