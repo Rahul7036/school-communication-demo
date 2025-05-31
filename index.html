@@ -294,6 +294,8 @@
             margin: 30px 0;
             color: #333;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin: 30px auto;
         }
 
         .demo-tabs {
@@ -301,6 +303,7 @@
             gap: 10px;
             margin-bottom: 30px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .demo-tab {
@@ -311,6 +314,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
+            min-width: 150px;
+            text-align: center;
         }
 
         .demo-tab.active {
@@ -321,6 +326,9 @@
         .demo-content {
             display: none;
             text-align: left;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
         }
 
         .demo-content.active {
@@ -339,6 +347,7 @@
             border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 1rem;
+            width: 100%;
         }
 
         .demo-textarea {
@@ -349,6 +358,7 @@
             min-height: 100px;
             font-size: 1rem;
             font-family: inherit;
+            width: 100%;
         }
 
         .demo-btn {
@@ -361,6 +371,10 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
         }
 
         .demo-btn:hover {
@@ -375,6 +389,25 @@
             padding: 20px;
             margin-top: 20px;
             min-height: 150px;
+        }
+
+        .booking-link {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #38a169;
+            margin-top: 15px;
+            word-break: break-all;
+        }
+
+        .booking-link a {
+            color: #2f855a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .booking-link a:hover {
+            text-decoration: underline;
         }
 
         .benefits-showcase {
@@ -1718,19 +1751,36 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
 
         function simulateMeetingDemo() {
             const result = document.getElementById('meeting-results');
+            const teacherName = document.querySelector('#meeting-demo input[placeholder="Teacher Name"]').value;
+            const subject = document.querySelector('#meeting-demo input[placeholder="Subject"]').value;
+            const date = document.querySelector('#meeting-demo input[placeholder="Meeting Date"]').value;
+            const time = document.querySelector('#meeting-demo input[placeholder="Start Time"]').value;
+            
+            const formattedDate = new Date(date).toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            const bookingLink = `https://school-meet.com/book/${teacherName.toLowerCase().replace(/\s+/g, '-')}-${subject.toLowerCase()}-${date}`;
+            
             result.innerHTML = `
                 <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Booking Link Created & Sent!</h4>
                 <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
                     <strong>Message sent to all parents:</strong><br><br>
-                    "Parent-Teacher Meeting with Mrs. Priya Sharma (Mathematics)<br>
-                    📅 Date: June 10, 2025<br>
-                    🕐 Time: 2:00 PM onwards<br><br>
+                    "Parent-Teacher Meeting with ${teacherName} (${subject})<br>
+                    📅 Date: ${formattedDate}<br>
+                    🕐 Time: ${time} onwards<br><br>
                     Book your 10-minute slot: [Booking Link]<br>
                     First come, first served basis.<br><br>
                     - ABC School Administration"
                 </div>
+                <div class="booking-link">
+                    <strong>🔗 Booking Link:</strong><br>
+                    <a href="${bookingLink}" target="_blank">${bookingLink}</a>
+                </div>
                 <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
-                    🔗 Booking Link: https://school-meet.com/book/priya-math-june10<br>
                     📊 Available Slots: 12 (10 mins each)
                 </p>
             `;
