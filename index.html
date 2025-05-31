@@ -616,20 +616,25 @@
             }
             
             .demo-tab {
-                width: 100%;
+                width: 100%; /* Make main tabs full width */
                 margin-bottom: 5px;
                 min-width: unset;
+                text-align: center;
             }
 
             .fee-mode .demo-tabs {
                 flex-wrap: wrap;
-                gap: 10px;
+                gap: 5px; /* Reduced gap */
+                justify-content: center;
             }
 
             .fee-mode .demo-tab {
-                 width: auto;
+                 width: auto; /* Allow tabs to shrink */
                  flex-grow: 1;
-                 min-width: unset;
+                 min-width: 120px; /* Minimum width to prevent extreme shrinking */
+                 font-size: 0.9rem; /* Slightly smaller font */
+                 padding: 10px 15px; /* Adjusted padding */
+                 text-align: center;
             }
             
             .cta-buttons {
@@ -641,7 +646,8 @@
                 width: 100%;
                 max-width: unset;
                 padding: 15px 20px;
-                white-space: normal;
+                white-space: normal; /* Allow text wrapping */
+                font-size: 1rem; /* Ensure readable font size */
             }
             
             .feedback-form {
@@ -677,6 +683,17 @@
             .demo-interface {
                 padding: 20px;
             }
+
+             .demo-input {
+                font-size: 0.9rem; /* Smaller font for inputs on mobile */
+                padding: 10px;
+             }
+
+             .demo-textarea {
+                 font-size: 0.9rem; /* Smaller font for textarea on mobile */
+                 padding: 10px;
+             }
+
         }
 
         @media (max-width: 480px) {
@@ -704,6 +721,15 @@
                 font-size: 0.8rem;
                 padding: 15px;
             }
+
+             .fee-mode .demo-tab {
+                 min-width: unset; /* Allow even smaller width if needed */
+             }
+
+             .demo-btn {
+                 font-size: 0.9rem; /* Slightly smaller font for buttons on very small screens */
+                 padding: 12px 15px;
+             }
         }
 
         .feedback-section {
