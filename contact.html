@@ -331,8 +331,33 @@
     <script>
         function submitContactForm(event) {
             event.preventDefault();
-            alert('Thank you for contacting us! Our team will reach out to you soon.');
-            document.getElementById('contactForm').reset();
+
+            // Get form values
+            const schoolName = document.querySelector('.container input[type="text"]:nth-of-type(1)').value;
+            const contactPerson = document.querySelector('.container input[type="text"]:nth-of-type(2)').value;
+            const phoneNumber = document.querySelector('.container input[type="tel"]').value;
+            const email = document.querySelector('.container input[type="email"]').value;
+            const numStudents = document.querySelector('.container input[type="number"]').value;
+            const message = document.querySelector('.container textarea').value;
+
+            // Format message for WhatsApp
+            const whatsappMessage = `New Demo Request:\n\nSchool Name: ${schoolName}\nContact Person: ${contactPerson}\nPhone: ${phoneNumber}\nEmail: ${email}\nNumber of Students: ${numStudents}\nMessage: ${message}`;
+
+            // Encode the message for the URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+
+            // Your WhatsApp number (replace with the correct format if needed, e.g., with country code)
+            const yourWhatsappNumber = '+917036771268';
+
+            // Construct the WhatsApp URL
+            // Use api.whatsapp.com for web, or whatsapp://send for mobile app (browser usually handles this)
+            const whatsappURL = `https://api.whatsapp.com/send?phone=${yourWhatsappNumber}&text=${encodedMessage}`;
+
+            // Redirect to WhatsApp
+            window.location.href = whatsappURL;
+
+            // Optionally, prevent further execution or add a small delay before redirect
+            // return false;
         }
     </script>
      <script>
