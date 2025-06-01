@@ -239,17 +239,31 @@
          }
 
     </style>
+    <style>
+        .nav {
+             width: 100%;
+             background: rgba(255,255,255,0.95);
+             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+             padding: 18px 0 16px 0;
+             position: sticky;
+             top: 0;
+             z-index: 100;
+             transition: transform 0.3s ease-in-out;
+         }
+
+         .nav-hidden {
+            transform: translateY(-100%);
+         }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav style="width:100%;background:rgba(255,255,255,0.95);box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:18px 0 16px 0;position:sticky;top:0;z-index:100; transition: transform 0.3s ease-in-out;">
+    <nav class="nav">
       <div class="nav-content">
-        <div style="font-weight:800;font-size:1.5rem;letter-spacing:1px;color:#2a4365;display:flex;align-items:center;gap:8px;">
-          <a href="index.html" class="nav-brand">
-            <span style="background:linear-gradient(135deg,#4299e1,#2b6cb0);color:white;padding:4px 14px;border-radius:8px;">EDUNO</span>
-            <span style="color:#4299e1;font-size:1.2rem;">•</span>
-          </a>
-        </div>
+        <a href="index.html" class="nav-brand">
+          <span>EDUNO</span>
+          <span style="color:#4299e1;font-size:1.2rem;">•</span>
+        </a>
         <div class="nav-links">
           <a href="index.html" class="nav-link">Home</a>
           <a href="ecosystem.html" class="nav-link">Ecosystem</a>
@@ -259,11 +273,6 @@
         </div>
       </div>
     </nav>
-     <style>
-        .nav-hidden {
-           transform: translateY(-100%);
-        }
-     </style>
     <!-- Hero Banner -->
     <section style="background:linear-gradient(135deg,#1a365d 0%,#2c5282 100%);color:white;padding:70px 0 40px 0;text-align:center;">
       <div style="max-width:700px;margin:0 auto;padding:0 24px;">
