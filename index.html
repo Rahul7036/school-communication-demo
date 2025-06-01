@@ -88,6 +88,11 @@
             top: 0;
             z-index: 100;
             /* backdrop-filter: blur(5px); Keep if desired */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-hidden {
+            transform: translateY(-100%);
         }
 
         .nav-content {
@@ -103,7 +108,7 @@
             font-weight: 800;
             font-size: 1.5rem;
             letter-spacing: 1px;
-            color: #2a4365;
+            color: var(--heading-color);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -136,7 +141,7 @@
         }
 
         .cta-button {
-            background: #4299e1;
+            background: var(--primary-blue);
             color: white;
             padding: 8px 20px;
             border-radius: 8px;
@@ -147,7 +152,7 @@
         }
 
         .cta-button:hover {
-            background: #2b6cb0;
+            background: var(--dark-blue);
             transform: translateY(-2px);
         }
 
@@ -949,8 +954,7 @@
               }
                .dashboard-card {
                  padding: 20px;
-               }\\
-               .dashboard-title {
+               }\n               .dashboard-title {
                 font-size: 1rem;
                }
                 .dashboard-value {
@@ -1025,8 +1029,7 @@
              }
              .section-header {
                  margin-bottom: 40px;
-             }\\
-             .section-header h2 {
+             }\n             .section-header h2 {
                 font-size: 1.8rem;
              }
               .section-header p {
@@ -2095,6 +2098,24 @@ English: 14 June, 11:00 AM</textarea></div>
         // Remove old, conflicting functions or references if necessary
         // For example, the original submitContactForm is no longer needed as the CTA buttons link directly
 
+    </script>
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.nav');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.classList.add('nav-hidden');
+            } else {
+                // Scrolling up
+                navbar.classList.remove('nav-hidden');
+            }
+
+            lastScrollTop = scrollTop;
+        });
     </script>
 </body>
 </html>
