@@ -1326,6 +1326,7 @@
                 <div class="demo-interface">
                     <div class="demo-tabs">
                         <button class="demo-tab active" onclick="showDemo('fees')">Fee Management</button>
+                        <button class="demo-tab" onclick="showDemo('studentmanager')">Student Manager</button>
                         <button class="demo-tab" onclick="showDemo('homework')">Homework Alert</button>
                         <button class="demo-tab" onclick="showDemo('meeting')">Meeting Booking</button>
                         <button class="demo-tab" onclick="showDemo('adminnotice')">Admin Notice</button>
@@ -1560,6 +1561,108 @@ English: 14 June, 11:00 AM</textarea>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Student Manager Demo Tab -->
+        <div id="studentmanager-demo" class="demo-content">
+            <h3 style="margin-bottom: 20px;">Student Manager Demo</h3>
+            <div class="demo-form" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+                <input type="text" class="demo-input" placeholder="Search by Name or Class" id="studentSearch" oninput="filterStudentList()">
+            </div>
+            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                <strong>Student List</strong>
+                <div id="studentList" style="margin-top: 10px;">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div class="results-panel" id="studentmanager-results">
+                Search and edit student details to see the preview here.
+            </div>
+        </div>
+
+        <!-- Student Edit Modal/Drawer -->
+        <div id="studentEditModal" style="display:none; position:fixed; top:0; right:0; width:100%; max-width:420px; height:100%; background:white; box-shadow:-2px 0 20px rgba(0,0,0,0.15); z-index:2000; overflow-y:auto; transition:right 0.3s;">
+            <div style="padding:24px 20px 20px 20px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="margin:0; font-size:1.3rem; color:#2d3748;">Edit Student</h3>
+                <button onclick="closeStudentEdit()" style="background:none; border:none; font-size:1.5rem; color:#c53030; cursor:pointer;">&times;</button>
+            </div>
+            <form id="studentEditForm" style="padding:20px;">
+                <div style="margin-bottom:15px;">
+                    <label>Name</label>
+                    <input type="text" class="demo-input" id="editName" required>
+                </div>
+                <div style="margin-bottom:15px; display:flex; gap:10px;">
+                    <div style="flex:1;">
+                        <label>Roll No</label>
+                        <input type="text" class="demo-input" id="editRoll">
+                    </div>
+                    <div style="flex:1;">
+                        <label>Class</label>
+                        <input type="text" class="demo-input" id="editClass" required>
+                    </div>
+                </div>
+                <div style="margin-bottom:15px; display:flex; gap:10px;">
+                    <div style="flex:1;">
+                        <label>Gender</label>
+                        <select class="demo-input" id="editGender">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div style="flex:1;">
+                        <label>Date of Birth</label>
+                        <input type="date" class="demo-input" id="editDOB">
+                    </div>
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label>Parent Name</label>
+                    <input type="text" class="demo-input" id="editParentName">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label>Parent Contact</label>
+                    <input type="text" class="demo-input" id="editParentContact" required>
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label>Address</label>
+                    <input type="text" class="demo-input" id="editAddress">
+                </div>
+                <div style="margin-bottom:15px; display:flex; gap:10px;">
+                    <div style="flex:1;">
+                        <label>Status</label>
+                        <select class="demo-input" id="editStatus">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Alumni">Alumni</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom:15px; background:#f8fafc; padding:12px; border-radius:8px;">
+                    <strong>Fee Details</strong>
+                    <div style="display:flex; gap:10px; margin-top:10px;">
+                        <div style="flex:1;">
+                            <label>Total Fees</label>
+                            <input type="number" class="demo-input" id="editTotalFees">
+                        </div>
+                        <div style="flex:1;">
+                            <label>Paid</label>
+                            <input type="number" class="demo-input" id="editPaidFees">
+                        </div>
+                        <div style="flex:1;">
+                            <label>Outstanding</label>
+                            <input type="number" class="demo-input" id="editOutstandingFees" readonly>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <label>Last Payment Date</label>
+                        <input type="date" class="demo-input" id="editLastPayment">
+                    </div>
+                </div>
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <button type="button" class="demo-btn" style="background:#e2e8f0; color:#2d3748;" onclick="closeStudentEdit()">Cancel</button>
+                    <button type="submit" class="demo-btn" style="background:#667eea; color:white;">Save Changes</button>
+                </div>
+            </form>
         </div>
 
         <!-- Benefits Showcase -->
@@ -2396,6 +2499,122 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
                 </p>
             `;
         }
+
+        // Enhanced Student Manager Demo Data
+        const demoStudents = [
+            { name: 'Rajesh Kumar', roll: '1001', class: '9-B', gender: 'Male', dob: '2010-05-12', parentName: 'Suresh Kumar', parent: '+91-9876543210', address: '123 Main St', status: 'Active', totalFees: 25000, paidFees: 20000, outstandingFees: 5000, lastPayment: '2025-05-01' },
+            { name: 'Priya Sharma', roll: '1002', class: '10-A', gender: 'Female', dob: '2009-08-20', parentName: 'Anita Sharma', parent: '+91-9876543211', address: '456 Park Ave', status: 'Active', totalFees: 28000, paidFees: 28000, outstandingFees: 0, lastPayment: '2025-05-10' },
+            { name: 'Amit Patel', roll: '1003', class: '8-C', gender: 'Male', dob: '2011-01-15', parentName: 'Ramesh Patel', parent: '+91-9876543212', address: '789 Lake Rd', status: 'Inactive', totalFees: 22000, paidFees: 15000, outstandingFees: 7000, lastPayment: '2025-04-20' },
+            { name: 'Sneha Reddy', roll: '1004', class: '9-B', gender: 'Female', dob: '2010-11-02', parentName: 'Sunita Reddy', parent: '+91-9876543213', address: '321 Hill St', status: 'Active', totalFees: 25000, paidFees: 25000, outstandingFees: 0, lastPayment: '2025-05-05' },
+            { name: 'Rohit Singh', roll: '1005', class: '10-A', gender: 'Male', dob: '2009-03-30', parentName: 'Vijay Singh', parent: '+91-9876543214', address: '654 River Ln', status: 'Alumni', totalFees: 27000, paidFees: 27000, outstandingFees: 0, lastPayment: '2024-12-15' },
+        ];
+        let editingStudentIdx = null;
+
+        function renderStudentList(filter = '') {
+            const list = document.getElementById('studentList');
+            let filtered = demoStudents.filter(s =>
+                s.name.toLowerCase().includes(filter.toLowerCase()) ||
+                s.class.toLowerCase().includes(filter.toLowerCase())
+            );
+            if (filtered.length === 0) {
+                list.innerHTML = '<div style="color:#c53030;">No students found.</div>';
+                return;
+            }
+            list.innerHTML = filtered.map((s, i) => `
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+                    <span style="flex:2;cursor:pointer;color:#2b6cb0;font-weight:500;" onclick="openStudentEdit(${i})">${s.name} (${s.class})</span>
+                    <span style="flex:1;">Roll: ${s.roll || '-'}</span>
+                    <span style="flex:2;">${s.parent}</span>
+                    <span style="flex:1;"><span style="padding:3px 8px;border-radius:8px;background:${s.status==='Active'?'#c6f6d5':s.status==='Inactive'?'#fed7d7':'#e2e8f0'};color:${s.status==='Active'?'#2f855a':s.status==='Inactive'?'#c53030':'#4a5568'};font-size:0.9em;">${s.status}</span></span>
+                    <span style="flex:1;">Outstanding: <span style="color:${s.outstandingFees>0?'#c53030':'#2f855a'};font-weight:600;">₹${s.outstandingFees}</span></span>
+                    <button style="flex:0;background:#667eea;color:white;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:0.9em;" onclick="openStudentEdit(${i})">Edit</button>
+                </div>
+            `).join('');
+        }
+
+        function filterStudentList() {
+            const val = document.getElementById('studentSearch').value;
+            renderStudentList(val);
+        }
+
+        function openStudentEdit(idx) {
+            editingStudentIdx = idx;
+            const s = demoStudents[idx];
+            document.getElementById('editName').value = s.name;
+            document.getElementById('editRoll').value = s.roll || '';
+            document.getElementById('editClass').value = s.class;
+            document.getElementById('editGender').value = s.gender || 'Male';
+            document.getElementById('editDOB').value = s.dob || '';
+            document.getElementById('editParentName').value = s.parentName || '';
+            document.getElementById('editParentContact').value = s.parent;
+            document.getElementById('editAddress').value = s.address || '';
+            document.getElementById('editStatus').value = s.status;
+            document.getElementById('editTotalFees').value = s.totalFees || 0;
+            document.getElementById('editPaidFees').value = s.paidFees || 0;
+            document.getElementById('editOutstandingFees').value = s.outstandingFees || 0;
+            document.getElementById('editLastPayment').value = s.lastPayment || '';
+            document.getElementById('studentEditModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeStudentEdit() {
+            document.getElementById('studentEditModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('editPaidFees').addEventListener('input', function() {
+            const total = parseInt(document.getElementById('editTotalFees').value) || 0;
+            const paid = parseInt(this.value) || 0;
+            document.getElementById('editOutstandingFees').value = Math.max(total - paid, 0);
+        });
+        document.getElementById('editTotalFees').addEventListener('input', function() {
+            const paid = parseInt(document.getElementById('editPaidFees').value) || 0;
+            const total = parseInt(this.value) || 0;
+            document.getElementById('editOutstandingFees').value = Math.max(total - paid, 0);
+        });
+
+        document.getElementById('studentEditForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (editingStudentIdx === null) return;
+            const s = demoStudents[editingStudentIdx];
+            s.name = document.getElementById('editName').value;
+            s.roll = document.getElementById('editRoll').value;
+            s.class = document.getElementById('editClass').value;
+            s.gender = document.getElementById('editGender').value;
+            s.dob = document.getElementById('editDOB').value;
+            s.parentName = document.getElementById('editParentName').value;
+            s.parent = document.getElementById('editParentContact').value;
+            s.address = document.getElementById('editAddress').value;
+            s.status = document.getElementById('editStatus').value;
+            s.totalFees = parseInt(document.getElementById('editTotalFees').value) || 0;
+            s.paidFees = parseInt(document.getElementById('editPaidFees').value) || 0;
+            s.outstandingFees = parseInt(document.getElementById('editOutstandingFees').value) || 0;
+            s.lastPayment = document.getElementById('editLastPayment').value;
+            renderStudentList(document.getElementById('studentSearch').value);
+            document.getElementById('studentmanager-results').innerHTML = `
+                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Student Updated!</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
+                    <strong>Name:</strong> ${s.name}<br>
+                    <strong>Roll No:</strong> ${s.roll}<br>
+                    <strong>Class:</strong> ${s.class}<br>
+                    <strong>Parent:</strong> ${s.parentName} (${s.parent})<br>
+                    <strong>Status:</strong> ${s.status}<br>
+                    <strong>Address:</strong> ${s.address}<br>
+                    <strong>DOB:</strong> ${s.dob}<br>
+                    <strong>Gender:</strong> ${s.gender}<br>
+                    <strong>Total Fees:</strong> ₹${s.totalFees}<br>
+                    <strong>Paid:</strong> ₹${s.paidFees}<br>
+                    <strong>Outstanding:</strong> ₹${s.outstandingFees}<br>
+                    <strong>Last Payment:</strong> ${s.lastPayment}
+                </div>
+            `;
+            closeStudentEdit();
+        });
+
+        // Render initial student list on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderStudentList();
+        });
     </script>
 </body>
 </html>
