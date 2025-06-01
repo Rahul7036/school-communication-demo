@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Eduno Ecosystem</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            color: #2d3748;
+            margin: 0;
+            padding: 0;
+        }
+        .nav {
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 18px 0 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+        .nav-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #2a4365;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .nav-brand span {
+            background: linear-gradient(135deg, #4299e1, #2b6cb0);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: #2a4365;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #4299e1;
+        }
+        .cta-button {
+            background: #4299e1;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background: #2b6cb0;
+            transform: translateY(-2px);
+        }
+        .ecosystem-hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            padding: 80px 0 50px 0;
+            text-align: center;
+        }
+        .ecosystem-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ecosystem-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            color: #fff;
+            margin-bottom: 0;
+        }
+        .roles-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px 80px 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        .role-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .role-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(66,153,225,0.13);
+        }
+        .role-icon {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            display: inline-block;
+        }
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            margin-bottom: 12px;
+        }
+        .role-desc {
+            color: #4a5568;
+            font-size: 1.08rem;
+            margin-bottom: 18px;
+        }
+        .role-features {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 320px;
+        }
+        .role-features li {
+            margin-bottom: 10px;
+            color: #2a4365;
+            font-size: 1rem;
+            padding-left: 22px;
+            position: relative;
+        }
+        .role-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4299e1;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .ecosystem-hero h1 {
+                font-size: 2.1rem;
+            }
+            .roles-section {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <span>EDUNO</span>
+                <span style="color:#4299e1;font-size:1.2rem;">•</span>
+            </a>
+            <div class="nav-links">
+                <a href="ecosystem.html" class="nav-link">Ecosystem</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <a href="contact.html" class="cta-button">Book Free Demo</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="ecosystem-hero">
+        <h1>The Eduno Ecosystem</h1>
+        <p>Empowering every stakeholder in your school with the right tools, access, and insights. Discover how Eduno connects Principals, Admins, Teachers, Parents, and Students for a smarter, seamless experience.</p>
+    </section>
+    <!-- Roles Section -->
+    <section class="roles-section">
+        <div class="role-card">
+            <div class="role-icon">👑</div>
+            <div class="role-title">Super Admin<br><span style="font-size:0.95em;color:#4a5568;font-weight:400;">(Principal/Owner)</span></div>
+            <div class="role-desc">Full control and oversight of the entire school ecosystem.</div>
+            <ul class="role-features">
+                <li>Complete analytics & dashboards</li>
+                <li>User management (Admins, Teachers, Students)</li>
+                <li>Fee collection & financial reports</li>
+                <li>School-wide communication & emergency alerts</li>
+                <li>Access control & permissions</li>
+            </ul>
+        </div>
+        <div class="role-card">
+            <div class="role-icon">🧑‍🏫</div>
+            <div class="role-title">Admin<br><span style="font-size:0.95em;color:#4a5568;font-weight:400;">(Teachers/Staff)</span></div>
+            <div class="role-desc">Efficient tools for daily operations and classroom management.</div>
+            <ul class="role-features">
+                <li>Send assignments & homework</li>
+                <li>Attendance & student records</li>
+                <li>Classroom communication</li>
+                <li>Exam & PTM scheduling</li>
+                <li>Progress tracking</li>
+            </ul>
+        </div>
+        <div class="role-card">
+            <div class="role-icon">👨‍👩‍👧‍👦</div>
+            <div class="role-title">Parents</div>
+            <div class="role-desc">Stay informed and engaged in your child's education.</div>
+            <ul class="role-features">
+                <li>Receive instant updates & alerts</li>
+                <li>Track academic progress</li>
+                <li>Fee payment reminders</li>
+                <li>PTM & event notifications</li>
+                <li>Direct communication with teachers</li>
+            </ul>
+        </div>
+        <div class="role-card">
+            <div class="role-icon">🎓</div>
+            <div class="role-title">Students</div>
+            <div class="role-desc">Empowered to learn, track progress, and stay organized.</div>
+            <ul class="role-features">
+                <li>Access assignments & homework</li>
+                <li>View exam schedules</li>
+                <li>Track attendance & results</li>
+                <li>Receive important notices</li>
+                <li>Engage in classroom activities</li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html> 

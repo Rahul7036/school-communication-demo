@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Communication System - Demo</title>
+    <title>Eduno - Making Every School Smarter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #4299e1;
+            --dark-blue: #2b6cb0;
+            --deep-blue: #1a365d;
+            --darker-blue: #2c5282;
+            --light-gray: #f7fafc;
+            --mid-gray: #e2e8f0;
+            --dark-gray: #4a5568;
+            --heading-color: #2a4365;
+            --text-color: #4a5568;
+            --success-green: #48bb78;
+            --danger-red: #e53e3e;
+            --warning-yellow: #dd6b20;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,290 +28,408 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-gray);
             overflow-x: hidden;
         }
 
-        .presentation-container {
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading-color);
+            font-weight: 700;
+        }
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 24px;
         }
 
-        .slide {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            margin: 30px 0;
+        .section {
+            padding: 80px 0;
+            position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: slideIn 0.8s ease-out forwards;
         }
 
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slide:nth-child(2) { animation-delay: 0.2s; }
-        .slide:nth-child(3) { animation-delay: 0.4s; }
-        .slide:nth-child(4) { animation-delay: 0.6s; }
-
-        .hero-slide {
-            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+        .section.bg-gradient {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--darker-blue) 100%);
             color: white;
-            text-align: center;
-            padding: 100px 40px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero-slide::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            animation: float 20s infinite linear;
+        .section.bg-light {
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--mid-gray) 100%);
         }
 
-        @keyframes float {
-            0% { transform: translateX(-50px) translateY(-50px); }
-            100% { transform: translateX(50px) translateY(50px); }
+        /* Remove old navbar styles */
+        .navbar {
+            display: none; /* Hide old navbar styles */
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .navbar .container {
+            display: none; /* Hide old navbar container styles */
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .brand {
+            display: none; /* Hide old brand styles */
         }
 
-        .hero-subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .brand-logo {
+            display: none; /* Hide old brand-logo styles */
         }
 
-        .hero-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 12px 24px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            font-weight: 600;
-            font-size: 1.1rem;
-            border: 1px solid rgba(255,255,255,0.3);
-            animation: pulse 2s infinite;
+        /* Add/Keep the newer nav styles */
+        .nav {
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 18px 0 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            /* backdrop-filter: blur(5px); Keep if desired */
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-top: 50px;
-            padding: 0 20px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .slide-content {
-            padding: 50px;
-        }
-
-        .slide-header {
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            margin-bottom: 40px;
+            justify-content: space-between;
+            padding: 0 24px;
         }
 
-        .slide-icon {
-            font-size: 3rem;
-            margin-right: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .nav-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #2a4365;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
         }
 
-        .slide-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2d3748;
+        .nav-brand span {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 4px 14px;
+            border-radius: 8px;
         }
 
-        .problem-solution {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 40px 0;
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
         }
 
-        .problem-box, .solution-box {
-            padding: 30px;
-            border-radius: 15px;
+        .nav-link {
+            font-weight: 600;
+            color: var(--heading-color);
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.2s;
         }
 
-        .problem-box {
-            background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
-            border-left: 5px solid #e53e3e;
+        .nav-link:hover {
+            color: var(--primary-blue);
         }
 
-        .solution-box {
-            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
-            border-left: 5px solid #38a169;
-        }
-
-        .demo-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .feature-demo {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid #e2e8f0;
+        .cta-button {
+            background: #4299e1;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
             transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #2b6cb0;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Adjustments for nav */
+        @media (max-width: 768px) {
+             .nav-content {
+                 flex-direction: column;
+                 gap: 12px;
+             }
+             .nav-links {
+                 gap: 18px;
+             }
+             .nav-brand {
+                 font-size: 1.4rem;
+             }
+             .nav-link {
+                 font-size: 0.95rem;
+             }
+             .cta-button {
+                 font-size: 0.9rem;
+                 padding: 8px 16px;
+             }
+        }
+
+        @media (max-width: 480px) {
+             .nav-content {
+                 padding: 0 12px;
+             }
+             .nav-brand {
+                 font-size: 1.2rem;
+             }
+             .nav-brand span {
+                 padding: 3px 10px;
+             }
+             .nav-links {
+                 gap: 12px;
+             }
+             .nav-link {
+                 font-size: 0.9rem;
+             }
+             .cta-button {
+                 font-size: 0.85rem;
+                 padding: 6px 12px;
+             }
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            /* Updated: Using RGB for easier opacity variation */
+            box-shadow: 0 4px 10px rgba(66, 153, 225, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(66, 153, 225, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--darker-blue) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .feature-demo:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-
-        .feature-demo::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            background-size: 30px 30px;
+            opacity: 0.3;
+            z-index: 1;
         }
 
-        .feature-number {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .feature-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #2d3748;
-            margin-bottom: 15px;
-            padding-right: 40px;
-        }
-
-        .feature-description {
-            color: #4a5568;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .demo-preview {
-            background: #2d3748;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            font-family: monospace;
-            font-size: 0.9rem;
-            margin-top: 15px;
+        .hero-content {
             position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .demo-preview::before {
-            content: '💻 Demo Preview';
-            position: absolute;
-            top: -12px;
-            left: 15px;
-            background: #2d3748;
-            padding: 0 10px;
-            font-size: 0.8rem;
-            font-family: 'Segoe UI', sans-serif;
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
         }
 
-        .live-demo-section {
-            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-            color: white;
-            padding: 60px 50px;
-            text-align: center;
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .demo-interface {
-            background: white;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-ctas .btn {
+            margin: 0 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            padding: 0 24px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
             border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: white; /* Ensuring white text */
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-color);
+        }
+
+        .features-grid, .demo-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card, .demo-feature-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
             padding: 30px;
-            margin: 30px 0;
-            color: #333;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .feature-card:hover, .demo-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3, .demo-feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p, .demo-feature-card p {
+            font-size: 1rem;
+            color: var(--dark-gray);
+        }
+
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .problem-box, .solution-box {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+            border-left: 5px solid var(--danger-red);
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+            border-left: 5px solid var(--success-green);
+        }
+
+        .problem-box h3, .solution-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .problem-box ul, .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box li, .solution-box li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .demo-section {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--darker-blue) 100%);
+            color: white;
+        }
+
+        .demo-interface-container {
+             background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+            color: var(--text-color);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             max-width: 800px;
-            margin: 30px auto;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .demo-tabs {
@@ -307,19 +441,20 @@
         }
 
         .demo-tab {
-            padding: 12px 24px;
-            background: #e2e8f0;
+            padding: 10px 20px;
+            background: var(--mid-gray);
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
-            min-width: 150px;
+            min-width: 120px;
             text-align: center;
+            font-size: 0.9rem;
         }
 
         .demo-tab.active {
-            background: #667eea;
+            background: var(--primary-blue);
             color: white;
         }
 
@@ -327,7 +462,7 @@
             display: none;
             text-align: left;
             padding: 20px;
-            background: #f8fafc;
+            background: var(--light-gray);
             border-radius: 10px;
         }
 
@@ -335,709 +470,140 @@
             display: block;
         }
 
-        .demo-form {
+        .demo-form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin-bottom: 20px;
         }
 
-        .demo-input {
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-            width: 100%;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        .demo-textarea {
-            grid-column: 1 / -1;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            min-height: 100px;
+         .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--heading-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--mid-gray);
+            border-radius: 6px;
             font-size: 1rem;
             font-family: inherit;
-            width: 100%;
+            transition: border-color 0.2s ease;
         }
 
-        .demo-btn {
-            background: #667eea;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-            display: block;
-        }
-
-        .demo-btn:hover {
-            background: #5a67d8;
-            transform: translateY(-2px);
-        }
-
-        .results-panel {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 150px;
-        }
-
-        .booking-link {
-            background: #e8f5e8;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #38a169;
-            margin-top: 15px;
-            word-break: break-all;
-        }
-
-        .booking-link a {
-            color: #2f855a;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .booking-link a:hover {
-            text-decoration: underline;
-        }
-
-        .benefits-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-
-        .benefit-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .benefit-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #2d3748;
-        }
-
-        .benefit-desc {
-            color: #4a5568;
-            line-height: 1.5;
-        }
-
-        .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 60px 40px;
-            margin-top: 50px;
-        }
-
-        .cta-title {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-text {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            padding: 15px 30px;
-            border: 2px solid white;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-btn.primary {
-            background: white;
-            color: #667eea;
-        }
-
-        .cta-btn.secondary {
-            background: transparent;
-            color: white;
-        }
-
-        .cta-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .benefit-section {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 80px 0;
-            margin: 40px 0;
-        }
-
-        .benefit-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .benefit-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border-color: #4299e1;
-        }
-
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #2b6cb0;
-        }
-
-        .benefit-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #2d3748;
-        }
-
-        .benefit-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .benefit-list li {
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-            color: #4a5568;
-            line-height: 1.5;
-        }
-
-        .benefit-list li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #48bb78;
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-                padding: 0 20px;
-            }
-            
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                padding: 0 10px;
-            }
-            
-            .stat-card {
-                padding: 15px;
-            }
-            
-            .stat-number {
-                font-size: 1.8rem;
-            }
-            
-            .benefit-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .slide-content {
-                padding: 20px;
-            }
-            
-            .problem-solution {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .demo-features {
-                grid-template-columns: 1fr;
-            }
-            
-            .demo-form {
-                grid-template-columns: 1fr;
-            }
-            
-            .demo-tabs {
-                flex-wrap: wrap;
-                gap: 5px;
-            }
-            
-            .demo-tab {
-                width: 100%; /* Make main tabs full width */
-                margin-bottom: 5px;
-                min-width: unset;
-                text-align: center;
-            }
-
-            .fee-mode .demo-tabs {
-                flex-wrap: wrap;
-                gap: 5px; /* Reduced gap */
-                justify-content: center;
-            }
-
-            .fee-mode .demo-tab {
-                 width: auto; /* Allow tabs to shrink */
-                 flex-grow: 1;
-                 min-width: 120px; /* Minimum width to prevent extreme shrinking */
-                 font-size: 0.9rem; /* Slightly smaller font */
-                 padding: 10px 15px; /* Adjusted padding */
-                 text-align: center;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .cta-btn {
-                width: 100%;
-                max-width: unset;
-                padding: 15px 20px;
-                white-space: normal; /* Allow text wrapping */
-                font-size: 1rem; /* Ensure readable font size */
-            }
-            
-            .feedback-form {
-                padding: 20px;
-            }
-            
-            .slide-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .slide-icon {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr; /* Stack dashboard cards vertically */
-                gap: 20px;
-            }
-
-            .dashboard-card {
-                 padding: 15px; /* Reduced padding for cards */
-            }
-
-            .dashboard-header {
-                 flex-direction: column;
-                 align-items: flex-start;
-                 margin-bottom: 15px;
-            }
-
-            .dashboard-title {
-                font-size: 1.1rem;
-                margin-bottom: 5px;
-            }
-
-            .dashboard-trend {
-                 font-size: 0.8rem;
-            }
-
-            .dashboard-value {
-                font-size: 1.8rem;
-            }
-
-            .fee-item {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .fee-item > div:first-child {
-                 flex-grow: 1;
-            }
-
-            .fee-status {
-                font-size: 0.7rem;
-                padding: 3px 6px;
-            }
-
-            .roi-input {
-                flex-direction: column;
-            }
-            
-            .roi-input input {
-                width: 100%;
-            }
-            
-            .success-metrics {
-                grid-template-columns: 1fr;
-            }
-
-            .demo-interface {
-                padding: 20px;
-            }
-
-             .demo-input {
-                font-size: 0.9rem; /* Smaller font for inputs on mobile */
-                padding: 10px;
-             }
-
-             .demo-textarea {
-                 font-size: 0.9rem; /* Smaller font for textarea on mobile */
-                 padding: 10px;
-             }
-
-             /* Fee Collection Analytics grid */
-            .dashboard-card > div:last-child {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); /* Use auto-fit and minmax for flexible columns */
-                gap: 5px; /* Reduced gap */
-                box-sizing: border-box;
-                width: 100%;
-                overflow: hidden;
-            }
-
-            .dashboard-card > div:last-child > div {
-                 text-align: center;
-                 padding: 3px; /* Further reduced padding */
-                 word-break: break-word;
-            }
-
-            .dashboard-card > div:last-child > div > div:first-child {
-                 font-size: 0.65rem; /* Further reduced label font size */
-                 white-space: normal;
-                 line-height: 1.2;
-                 color: #4a5568; /* Ensure consistent label color */
-            }
-
-            .dashboard-card > div:last-child > div > div:last-child {
-                 font-size: 1rem; /* Further reduced value font size */
-                 font-weight: bold; /* Ensure value is bold */
-                 color: #2d3748; /* Ensure consistent value color */
-            }
-
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .stat-card {
-                margin-bottom: 10px;
-            }
-            
-            .slide-title {
-                font-size: 1.8rem;
-            }
-            
-            .benefit-card {
-                padding: 20px;
-            }
-            
-            .demo-preview {
-                font-size: 0.8rem;
-                padding: 15px;
-            }
-
-             .fee-mode .demo-tab {
-                 min-width: unset; /* Allow even smaller width if needed */
-             }
-
-             .demo-btn {
-                 font-size: 0.9rem; /* Slightly smaller font for buttons on very small screens */
-                 padding: 12px 15px;
-             }
-
-             /* Further adjust analytics grid on very small screens */
-            .dashboard-card > div:last-child {
-                grid-template-columns: 1fr; /* Stack analytics vertically on very small screens */
-                gap: 15px; /* Adjusted gap */
-            }
-
-             .dashboard-card > div:last-child > div {
-                 text-align: left; /* Align text to left on vertical stack */
-             }
-
-              .dashboard-card > div:last-child > div > div:first-child {
-                 font-size: 0.8rem; /* Slightly larger label font on vertical stack */
-              }
-
-              .dashboard-card > div:last-child > div > div:last-child {
-                 font-size: 1.5rem; /* Slightly larger value font on vertical stack */
-              }
-        }
-
-        .feedback-section {
-            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
-            padding: 80px 0;
-            margin: 40px 0;
-            color: white;
-        }
-
-        .feedback-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .feedback-form {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #4a5568;
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f8fafc;
-        }
-
-        .form-input:focus {
-            border-color: #4299e1;
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary-blue);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
-            background: white;
         }
 
         .form-textarea {
-            min-height: 120px;
+            min-height: 90px;
             resize: vertical;
         }
 
-        .submit-btn {
-            background: linear-gradient(135deg, #4299e1 0%, #2b6cb0 100%);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .whatsapp-icon {
-            font-size: 1.2rem;
-        }
-
-        .roi-calculator {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .roi-input {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            align-items: center;
-        }
-
-        .roi-input input {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .roi-result {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border-left: 4px solid #4299e1;
-        }
-
-        .success-metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .metric-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .metric-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2b6cb0;
-            margin-bottom: 10px;
-        }
-
-        .metric-label {
-            color: #4a5568;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .roi-input {
-                flex-direction: column;
-            }
-            
-            .roi-input input {
-                width: 100%;
-            }
-            
-            .success-metrics {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .dashboard-section {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 40px 0;
+             background: var(--light-gray);
         }
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin: 30px 0;
+            margin-top: 40px;
         }
 
         .dashboard-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .dashboard-card.red {
+             border-left-color: var(--danger-red);
+        }
+
+        .dashboard-card.green {
+             border-left-color: var(--success-green);
         }
 
         .dashboard-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .dashboard-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2d3748;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--heading-color);
         }
 
         .dashboard-value {
             font-size: 2rem;
-            font-weight: bold;
-            color: #2b6cb0;
-            margin: 10px 0;
+            font-weight: 800;
+            color: var(--dark-blue);
+            margin: 8px 0;
+        }
+
+        .dashboard-card.red .dashboard-value {
+             color: var(--danger-red);
+        }
+         .dashboard-card.green .dashboard-value {
+             color: var(--success-green);
         }
 
         .dashboard-trend {
             display: flex;
             align-items: center;
-            gap: 5px;
-            color: #48bb78;
-            font-size: 0.9rem;
+            gap: 4px;
+            font-size: 0.85rem;
+            color: var(--success-green);
+            font-weight: 600;
         }
 
         .dashboard-trend.negative {
-            color: #e53e3e;
+            color: var(--danger-red);
         }
 
         .progress-bar {
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            margin: 15px 0;
+            height: 6px;
+            background: var(--mid-gray);
+            border-radius: 3px;
+            margin: 12px 0;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4299e1, #667eea);
-            border-radius: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--dark-blue));
+            border-radius: 3px;
             transition: width 0.3s ease;
+        }
+
+         .dashboard-card.red .progress-fill {
+             background: linear-gradient(90deg, var(--danger-red), #c53030);
+         }
+         .dashboard-card.green .progress-fill {
+             background: linear-gradient(90deg, var(--success-green), #2f855a);
+         }
+
+        .list-info {
+            display: flex;
+            justify-content: space-between;
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+            margin-top: 8px;
         }
 
         .fee-list {
@@ -1048,16 +614,27 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--mid-gray);
+            font-size: 0.95rem;
         }
 
         .fee-item:last-child {
             border-bottom: none;
         }
 
+        .fee-item .name {
+             font-weight: 600;
+             color: var(--heading-color);
+        }
+
+        .fee-item .amount {
+             font-weight: 600;
+             color: var(--dark-blue);
+        }
+
         .fee-status {
-            padding: 4px 8px;
-            border-radius: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
             font-size: 0.8rem;
             font-weight: 500;
         }
@@ -1077,253 +654,528 @@
             color: #c53030;
         }
 
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
+         .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+         }
+
+         .analytics-item h4 {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-bottom: 4px;
+         }
+
+          .analytics-item p {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--heading-color);
+          }
+
+        /* New styles for realistic dashboard demo */
+        .dashboard-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
+
+        .overview-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .card-content {
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            margin-bottom: 4px;
+        }
+
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--heading-color);
+        }
+
+        .dashboard-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--mid-gray);
+            padding-bottom: 10px;
+        }
+
+        .activity-list, .event-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        .activity-item, .event-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .activity-item:last-child, .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon, .event-icon {
+            font-size: 1.2rem;
+            padding: 8px;
+            border-radius: 6px;
+            background: var(--mid-gray);
+            color: var(--dark-blue);
+        }
+
+        .activity-text {
+            flex-grow: 1;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .activity-time, .event-date {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .event-icon {
+            background: var(--light-gray);
+        }
+
+        .event-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .hero-ctas {
+                justify-content: center;
+            }
+             .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+             }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+            /* Original responsive navbar styles */
+            .navbar .container {
+                 flex-direction: column;
+                 gap: 12px;
+            }
+            /* Keep the responsive nav-links and other styles */
+            .nav-links {
+                gap: 18px;
+            }
+            .brand {
+                 font-size: 1.4rem;
+            }
+             .brand-logo {
+                 font-size: 1.2rem;
+             }
+            .hero-section {
+                padding: 80px 0 50px 0;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+             .hero-ctas .btn {
+                margin: 0 5px;
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 15px;
+                padding: 0 12px;
+            }
+             .stat-number {
+                font-size: 1.8rem;
+             }
+             .stat-label {
+                 font-size: 0.8rem;
+             }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            .section-header p {
+                 font-size: 1rem;
+            }
+            .features-grid, .demo-features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .feature-card, .demo-feature-card {
+                 padding: 25px;
+            }
+             .problem-solution-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+             }
+             .problem-box, .solution-box {
+                 padding: 25px;
+             }
+             .problem-box h3, .solution-box h3 {
+                 font-size: 1.2rem;
+             }
+             .problem-box li, .solution-box li {
+                 font-size: 0.95rem;
+             }
+             .demo-interface-container {
+                 padding: 25px;
+             }
+             .demo-tab {
+                 min-width: unset;
+                 flex-grow: 1;
+                 font-size: 0.85rem;
+                 padding: 8px 15px;
+             }
+             .demo-form-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+             }
+              .form-group label {
+                 font-size: 0.9rem;
+             }
+             .form-input, .form-textarea {
+                 padding: 8px;
+                 font-size: 0.9rem;
+             }
+              .form-textarea {
+                 min-height: 70px;
+              }
+             .dashboard-grid {
+                 grid-template-columns: 1fr;
+                 gap: 20px;
+              }
+               .dashboard-card {
+                 padding: 20px;
+               }\\
+               .dashboard-title {
+                font-size: 1rem;
+               }
+                .dashboard-value {
+                 font-size: 1.6rem;
+                }
+              .analytics-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                 gap: 10px;
+              }
+              .analytics-item h4 {
+                font-size: 0.8rem;
+              }
+              .analytics-item p {
+                 font-size: 1.2rem;
+              }
+             .fee-item {
+                 font-size: 0.9rem;
+             }
+              .fee-item .name, .fee-item .amount {
+                font-size: 0.9rem;
+              }
+              .fee-status {
+                 font-size: 0.7rem;
+              }
+        }
+
+        @media (max-width: 480px) {
+            /* Original responsive navbar styles */
+            .navbar .container {
+                 padding: 0 12px;
+            }
+            .brand {
+                 font-size: 1.2rem;
+            }
+            .brand-logo {
+                 font-size: 1rem;
+                 padding: 3px 10px;
+             }
+             /* Keep the responsive nav-links and other styles */
+             .nav-links {
+                 gap: 12px;
+             }
+             .nav-link {
+                 font-size: 0.9rem;
+             }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                 font-size: 0.9rem;
+             }
+            .hero-ctas .btn {
+                 font-size: 0.85rem;
+                 padding: 8px 15px;
+                 gap: 5px;
+             }
+             .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+             }
+             .stat-card {
+                 padding: 15px;
+             }
+              .stat-number {
+                font-size: 1.4rem;
+              }
+               .stat-label {
+                 font-size: 0.7rem;
+              }
+             .section {
+                 padding: 40px 0;
+             }
+             .section-header {
+                 margin-bottom: 40px;
+             }\\
+             .section-header h2 {
+                font-size: 1.8rem;
+             }
+              .section-header p {
+                 font-size: 0.9rem;
+              }
+              .feature-card, .demo-feature-card {
+                 padding: 20px;
+              }
+              .feature-card h3, .demo-feature-card h3 {
+                font-size: 1.1rem;
+             }
+             .feature-card p, .demo-feature-card p {
+                 font-size: 0.9rem;
+             }
+              .problem-box, .solution-box {
+                 padding: 20px;
+             }
+              .problem-box h3, .solution-box h3 {
+                font-size: 1.1rem;
+             }
+             .problem-box li, .solution-box li {
+                 font-size: 0.9rem;
+             }
+             .demo-interface-container {
+                 padding: 20px;
+             }
+              .demo-form-grid {
+                gap: 10px;
+             }
+              .form-group label {
+                 font-size: 0.9rem;
+             }
+             .form-input, .form-textarea {
+                 padding: 8px;
+                 font-size: 0.9rem;
+             }
+              .form-textarea {
+                 min-height: 70px;
+              }
+             .dashboard-card {
+                 padding: 15px;
+              }
+              .dashboard-title {
+                 font-size: 0.9rem;
+             }
+             .dashboard-value {
+                 font-size: 1.4rem;
+             }
+             .dashboard-trend {
+                 font-size: 0.8rem;
+             }
+             .analytics-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                 gap: 8px;
+             }
+              .analytics-item h4 {
+                 font-size: 0.75rem;
+              }
+              .analytics-item p {
+                 font-size: 1rem;
+              }
+             .fee-item {
+                 font-size: 0.9rem;
+             }
+              .fee-item .name, .fee-item .amount {
+                font-size: 0.9rem;
+              }
+              .fee-status {
+                 font-size: 0.7rem;
+              }
+        }
+
     </style>
 </head>
 <body>
-    <div class="presentation-container">
-        <!-- Enhanced Hero Slide -->
-        <div class="slide hero-slide">
-            <div class="hero-content">
-                <div class="hero-badge">🚀 Modernize Your School Communication</div>
-                <h1 class="hero-title">Smart School Communication System</h1>
-                <p class="hero-subtitle">Transform Your School's Communication & Attract More Students with Our Modern, Automated Solution</p>
-                
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">40%</div>
-                        <div class="stat-label">More Student Enrollment</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">85%</div>
-                        <div class="stat-label">Parent Satisfaction</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">5hrs</div>
-                        <div class="stat-label">Time Saved Weekly</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Digital Ready</div>
-                    </div>
+    <!-- Navigation Bar -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <span>EDUNO</span>
+                <span style="color:#4299e1;font-size:1.2rem;">•</span>
+            </a>
+            <div class="nav-links">
+                <a href="ecosystem.html" class="nav-link">Ecosystem</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <a href="contact.html" class="cta-button">Book Free Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="section hero-section">
+        <div class="container hero-content">
+            <div class="hero-badge">Making Every School Smarter</div>
+            <h1 class="hero-title">The Smarter Way to Manage Your School</h1>
+            <p class="hero-subtitle">Simplify operations, boost parent trust, and focus on what truly matters—educating students. Eduno brings all your school management needs into one secure, easy-to-use platform.</p>
+            <div class="hero-ctas">
+                <a href="contact.html" class="btn btn-primary">Schedule Live Demo</a>
+                <a href="contact.html" class="btn btn-secondary">Get Custom Quote</a>
+            </div>
+        </div>
+         <div class="container stats-grid">
+             <div class="stat-card">
+                 <div class="stat-number">40%</div>
+                 <div class="stat-label">More Student Enrollment</div>
+             </div>
+             <div class="stat-card">
+                 <div class="stat-number">85%</div>
+                 <div class="stat-label">Parent Satisfaction</div>
+             </div>
+             <div class="stat-card">
+                 <div class="stat-number">5hrs</div>
+                 <div class="stat-label">Time Saved Weekly</div>
+             </div>
+             <div class="stat-card">
+                 <div class="stat-number">100%</div>
+                 <div class="stat-label">Digital Ready</div>
+             </div>
+         </div>
+    </section>
+
+    <!-- Problem & Solution Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Solving Key School Challenges</h2>
+                <p>Eduno directly addresses the common pain points faced by educational institutions today, offering efficient solutions for communication, management, and engagement.</p>
+            </div>
+            <div class="problem-solution-grid">
+                <div class="problem-box">
+                    <h3>❌ Communication Gaps</h3>
+                    <ul>
+                        <li>Parents missing important updates</li>
+                        <li>Teachers overloaded with manual tasks</li>
+                        <li>Inefficient information flow</li>
+                        <li>Lack of transparency with stakeholders</li>
+                    </ul>
+                </div>
+                <div class="solution-box">
+                    <h3>✅ Seamless Solutions</h3>
+                    <ul>
+                        <li>Automated, targeted messaging</li>
+                        <li>Streamlined administrative workflows</li>
+                        <li>Centralized platform for all updates</li>
+                        <li>Real-time, transparent information sharing</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- School Benefits Section -->
-        <div class="benefit-section">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-icon">🎯</div>
-                    <h2 class="slide-title">All-in-One Solution: Every Communication Challenge, Solved</h2>
-                </div>
-                <p style="font-size:1.1rem; color:#4a5568; margin-bottom:30px;">
-                    Our platform brings together every tool your school needs to communicate, organize, and succeed—no more juggling multiple apps or manual work.
-                </p>
-                <div class="benefit-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">📢</div>
-                        <h3 class="benefit-title">Admin Notice</h3>
-                        <ul class="benefit-list">
-                            <li>Send instant updates to teachers, students, or parents</li>
-                            <li>Target specific classes or groups</li>
-                        </ul>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">💰</div>
-                        <h3 class="benefit-title">Fee Management</h3>
-                        <ul class="benefit-list">
-                            <li>Automated reminders and bulk uploads</li>
-                            <li>Track payments and send follow-ups</li>
-                        </ul>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">📚</div>
-                        <h3 class="benefit-title">Smart Syllabus Planner</h3>
-                        <ul class="benefit-list">
-                            <li>Yearly/weekly planning</li>
-                            <li>Auto-alerts to teachers for what to cover</li>
-                        </ul>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">📝</div>
-                        <h3 class="benefit-title">Homework & Exam Notifications</h3>
-                        <ul class="benefit-list">
-                            <li>Send assignments and full exam schedules</li>
-                            <li>Keep parents and students accountable</li>
-                        </ul>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🤝</div>
-                        <h3 class="benefit-title">PTM Scheduling</h3>
-                        <ul class="benefit-list">
-                            <li>Automatic slot division for parents</li>
-                            <li>Manual scheduling for special cases</li>
-                        </ul>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🚨</div>
-                        <h3 class="benefit-title">Emergency Notification</h3>
-                        <ul class="benefit-list">
-                            <li>One-click urgent alerts to all stakeholders</li>
-                        </ul>
-                    </div>
-                    <!-- Add more cards for any other features you want to highlight -->
-                </div>
+    <!-- Demo Features Section -->
+    <section class="section bg-light">
+         <div class="container">
+            <div class="section-header">
+                <h2>Explore Core Features</h2>
+                <p>Discover the powerful tools within Eduno designed to simplify administration, enhance teaching, and connect your entire school community.</p>
             </div>
-        </div>
-
-        <!-- Problem & Solution -->
-        <div class="slide">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-icon">🎯</div>
-                    <h2 class="slide-title">The Real Challenges Schools Face</h2>
-                </div>
-                <div class="problem-solution">
-                    <div class="problem-box">
-                        <h3 style="color: #c53030; margin-bottom: 20px;">❌ Current Communication Problems</h3>
-                        <ul style="line-height: 1.8;">
-                            <li>Parents miss important updates and deadlines</li>
-                            <li>Teachers spend hours on manual communication</li>
-                            <li>Fee collection delays affect school operations</li>
-                            <li>PTM scheduling creates chaos and confusion</li>
-                            <li>Lack of timely feedback affects learning</li>
-                        </ul>
-                    </div>
-                    <div class="solution-box">
-                        <h3 style="color: #2f855a; margin-bottom: 20px;">✅ Our Smart Solution</h3>
-                        <ul style="line-height: 1.8;">
-                            <li>Automated, timely updates to all stakeholders</li>
-                            <li>Smart scheduling and planning tools</li>
-                            <li>Automated fee reminders and tracking</li>
-                            <li>Easy PTM booking and management</li>
-                            <li>Real-time feedback and progress tracking</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="demo-features-grid">
+                 <div class="demo-feature-card">
+                    <h3>Admin/Principal Dashboard</h3>
+                    <p>Full control and oversight with tools for school-wide communication and user management.</p>
+                 </div>
+                 <div class="demo-feature-card">
+                    <h3>Smart Syllabus Planner</h3>
+                    <p>Plan academics and automate reminders for teachers, ensuring curriculum completion.</p>
+                 </div>
+                 <div class="demo-feature-card">
+                    <h3>Bulk Student Registration</h3>
+                    <p>Easily register students and manage data with bulk import options.</p>
+                 </div>
+                 <div class="demo-feature-card">
+                    <h3>Flexible User Mapping</h3>
+                    <p>Assign teachers and students to multiple classes and roles seamlessly.</p>
+                 </div>
+                 <div class="demo-feature-card">
+                    <h3>Automated Fee Reminders</h3>
+                    <p>Ensure timely fee collection with automated, personalized reminders.</p>
+                 </div>
+                 <div class="demo-feature-card">
+                    <h3>Assignment & Exam Notifications</h3>
+                    <p>Communicate academic schedules and deadlines effectively to all.</p>
+                 </div>
+                 <div class="demo-feature-card">
+                    <h3>PTM Scheduling</h3>
+                    <p>Simplify parent-teacher meeting coordination with easy scheduling tools.</p>
+                 </div>
+                 <div class="demo-feature-card">
+                    <h3>Emergency Notifications</h3>
+                    <p>Instantly broadcast urgent alerts to the entire school community.</p>
+                 </div>
             </div>
-        </div>
+         </div>
+    </section>
 
-        <!-- Demo Features -->
-        <div class="slide">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-icon">⚡</div>
-                    <h2 class="slide-title">System Demo - Core Features</h2>
-                </div>
-                <div class="demo-features">
-                    <div class="feature-demo">
-                        <div class="feature-number">1</div>
-                        <h3 class="feature-title">Admin/Principal Dashboard</h3>
-                        <p class="feature-description">
-                            Send notices to all teachers, manage users, and send school-wide emergency notifications. Full control over communication and user management.
-                        </p>
-                        <div class="demo-preview">
-                            📢 Staff meeting notifications<br>
-                            👥 User management<br>
-                            🚨 Emergency alerts to all parents/teachers
-                        </div>
-                    </div>
-                    <div class="feature-demo">
-                        <div class="feature-number">2</div>
-                        <h3 class="feature-title">Smart Syllabus Planner</h3>
-                        <p class="feature-description">
-                            Plan the yearly syllabus and auto-notify teachers about weekly topics to cover, ensuring timely completion and transparency.
-                        </p>
-                        <div class="demo-preview">
-                            📅 Yearly/term planning<br>
-                            🔔 Weekly topic reminders<br>
-                            📊 Progress tracking
-                        </div>
-                    </div>
-                    <div class="feature-demo">
-                        <div class="feature-number">3</div>
-                        <h3 class="feature-title">Bulk Student Registration</h3>
-                        <p class="feature-description">
-                            Register students in bulk, handle discounts, and sync with Google Sheets or other data sources for easy management.
-                        </p>
-                        <div class="demo-preview">
-                            📋 Bulk upload (CSV/Sheets)<br>
-                            💸 Discount management<br>
-                            🔄 Data sync with school records
-                        </div>
-                    </div>
-                    <div class="feature-demo">
-                        <div class="feature-number">4</div>
-                        <h3 class="feature-title">Flexible User Mapping</h3>
-                        <p class="feature-description">
-                            Map teachers and students to multiple classes for flexible scheduling and subject allocation.
-                        </p>
-                        <div class="demo-preview">
-                            👩‍🏫 Teachers in multiple classes<br>
-                            👨‍🎓 Students in special groups<br>
-                            🔄 Easy reassignment
-                        </div>
-                    </div>
-                    <div class="feature-demo">
-                        <div class="feature-number">5</div>
-                        <h3 class="feature-title">Automated Fee Reminders</h3>
-                        <p class="feature-description">
-                            Automated reminders for different tenures (monthly, quarterly, yearly), discounts, and bulk notifications to parents.
-                        </p>
-                        <div class="demo-preview">
-                            ⏰ Tenure-based reminders<br>
-                            💸 Discount handling<br>
-                            📢 Bulk notifications
-                        </div>
-                    </div>
-                    <div class="feature-demo">
-                        <div class="feature-number">6</div>
-                        <h3 class="feature-title">Assignment & Exam Notifications</h3>
-                        <p class="feature-description">
-                            Weekly assignment notifications, exam schedules, and reminders sent to relevant classes and parents.
-                        </p>
-                        <div class="demo-preview">
-                            📝 Assignment alerts<br>
-                            🗓️ Exam schedules<br>
-                            🔔 Automated reminders
-                        </div>
-                    </div>
-                    <div class="feature-demo">
-                        <div class="feature-number">7</div>
-                        <h3 class="feature-title">PTM Scheduling</h3>
-                        <p class="feature-description">
-                            Both manual and automatic scheduling of Parent-Teacher Meetings, with notifications to class teachers and parents.
-                        </p>
-                        <div class="demo-preview">
-                            📅 Manual/auto PTM setup<br>
-                            📢 Class teacher/parent notifications<br>
-                            🗂️ Organized schedules
-                        </div>
-                    </div>
-                    <div class="feature-demo">
-                        <div class="feature-number">8</div>
-                        <h3 class="feature-title">Emergency Notifications</h3>
-                        <p class="feature-description">
-                            School-level alerts sent by admin to all parents and teachers for urgent communication.
-                        </p>
-                        <div class="demo-preview">
-                            🚨 Emergency alerts<br>
-                            📢 School-wide reach<br>
-                            ⏱️ Instant delivery
-                        </div>
-                    </div>
-                    <!-- Keep the rest of your existing core features here, or merge as needed -->
-                </div>
+    <!-- Live Demo Interface Section -->
+    <section class="section demo-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: white;">Explore the Dashboard (Demo)</h2>
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px auto;">Get a glimpse into the powerful and intuitive Eduno dashboard interface designed for administrators and teachers.</p>
             </div>
-        </div>
-
-        <!-- Live Demo Interface -->
-        <div class="slide">
-            <div class="live-demo-section">
-                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">🖥️ Try the Live Demo</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 30px;">Experience how easy it is to manage school communication</p>
-                <div class="demo-interface">
+             <div class="demo-interface-container">
                     <div class="demo-tabs">
                         <button class="demo-tab active" onclick="showDemo('fees')">Fee Management</button>
                         <button class="demo-tab" onclick="showDemo('studentmanager')">Student Manager</button>
@@ -1335,31 +1187,31 @@
                         <button class="demo-tab" onclick="showDemo('ptm')">PTM Scheduling</button>
                         <button class="demo-tab" onclick="showDemo('emergency')">Emergency Notif</button>
                     </div>
-                    
+
                     <div id="fees-demo" class="demo-content active">
                         <h3 style="margin-bottom: 20px;">Fee Reminder System</h3>
-                        
+
                         <!-- Toggle between Single and Bulk -->
-                        <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;" class="fee-mode-toggle">
                             <button class="demo-tab active" onclick="toggleFeeMode('single')" id="single-tab">Single Entry</button>
                             <button class="demo-tab" onclick="toggleFeeMode('bulk')" id="bulk-tab">Bulk Upload (CSV)</button>
                         </div>
-                        
+
                         <!-- Single Entry Form -->
                         <div id="single-entry" class="fee-mode">
-                            <div class="demo-form">
-                                <input type="text" class="demo-input" placeholder="Student Name" value="Rajesh Kumar">
-                                <input type="text" class="demo-input" placeholder="Parent Phone" value="+91-9876543210">
-                                <input type="number" class="demo-input" placeholder="Fee Amount" value="2500">
-                                <input type="date" class="demo-input" placeholder="Due Date" value="2025-06-15">
+                            <div class="demo-form-grid">
+                                <div class="form-group"><label>Student Name</label><input type="text" class="form-input" placeholder="Rajesh Kumar" value="Rajesh Kumar"></div>
+                                <div class="form-group"><label>Parent Phone</label><input type="text" class="form-input" placeholder="+91-9876543210" value="+91-9876543210"></div>
+                                <div class="form-group"><label>Fee Amount</label><input type="number" class="form-input" placeholder="2500" value="2500"></div>
+                                <div class="form-group"><label>Due Date</label><input type="date" class="form-input" placeholder="2025-06-15" value="2025-06-15"></div>
                             </div>
-                            <button class="demo-btn" onclick="simulateSingleFeeDemo()">Send Fee Reminder</button>
+                            <button class="btn btn-primary" onclick="simulateSingleFeeDemo()">Send Fee Reminder</button>
                         </div>
-                        
+
                         <!-- Bulk Upload Form -->
                         <div id="bulk-entry" class="fee-mode" style="display: none;">
-                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                                <h4 style="margin-bottom: 10px; color: #495057;">📋 CSV Format Required:</h4>
+                            <div style="background: var(--mid-gray); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                                <h4 style="margin-bottom: 10px; color: var(--heading-color);">📋 CSV Format Required:</h4>
                                 <div style="background: white; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; overflow-x: auto;">
                                     Student Name, Parent Phone, Fee Amount, Due Date<br>
                                     Rajesh Kumar, +91-9876543210, 2500, 2025-06-15<br>
@@ -1368,88 +1220,135 @@
                                 </div>
                             </div>
                             <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
-                                <input type="file" accept=".csv" class="demo-input" style="flex: 1;">
-                                <button class="demo-btn" onclick="simulateBulkFeeDemo()" style="white-space: nowrap;">Process CSV</button>
+                                <input type="file" accept=".csv" class="form-input" style="flex: 1;">
+                                <button class="btn btn-primary" onclick="simulateBulkFeeDemo()" style="white-space: nowrap;">Process CSV</button>
                             </div>
                             <div style="text-align: center;">
-                                <button class="demo-btn" onclick="downloadSampleCSV()" style="background: #28a745;">Download Sample CSV</button>
+                                <button class="btn" onclick="downloadSampleCSV()" style="background: var(--success-green); color: white; margin-top: 10px;">Download Sample CSV</button>
                             </div>
                         </div>
-                        
+
                         <div class="results-panel" id="fee-results">
                             Choose Single Entry or Bulk Upload to see automated message previews
                         </div>
                     </div>
-                    
+
+                    <div id="studentmanager-demo" class="demo-content">
+                        <h3 style="margin-bottom: 20px;">Student Manager</h3>
+
+                        <div style="margin-bottom: 20px;">
+                            <label for="studentSearch" style="display: block; margin-bottom: 6px; color: var(--heading-color); font-weight: 600;">Search Student:</label>
+                            <input type="text" id="studentSearch" class="form-input" placeholder="Enter name or class..." oninput="filterStudentList()">
+                        </div>
+
+                        <div id="studentList" style="margin-bottom: 20px;">
+                            <!-- Student list will be rendered here by JavaScript -->
+                            Loading students...
+                        </div>
+
+                        <!-- Student Edit Modal (Simplified structure) -->
+                        <div id="studentEditModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+                            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 600px; width: 90%; max-height: 90%; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                                <h3 style="margin-bottom: 20px;">Edit Student Details</h3>
+                                <form id="studentEditForm">
+                                    <div class="demo-form-grid">
+                                        <div class="form-group"><label>Name</label><input type="text" class="form-input" id="editName" required></div>
+                                        <div class="form-group"><label>Roll No.</label><input type="text" class="form-input" id="editRoll"></div>
+                                        <div class="form-group"><label>Class</label><input type="text" class="form-input" id="editClass" required></div>
+                                         <div class="form-group"><label>Gender</label><select class="form-input" id="editGender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+                                        <div class="form-group"><label>Date of Birth</label><input type="date" class="form-input" id="editDOB"></div>
+                                        <div class="form-group"><label>Parent Name</label><input type="text" class="form-input" id="editParentName"></div>
+                                        <div class="form-group"><label>Parent Contact</label><input type="text" class="form-input" id="editParentContact" required></div>
+                                        <div class="form-group" style="grid-column: span 2;"><label>Address</label><textarea class="form-input form-textarea" id="editAddress"></textarea></div>
+                                        <div class="form-group"><label>Status</label><select class="form-input" id="editStatus"><option>Active</option><option>Inactive</option><option>Alumni</option></select></div>
+                                         <div class="form-group"></div> <!-- Spacer -->
+                                        <div class="form-group"><label>Total Fees</label><input type="number" class="form-input" id="editTotalFees" value="0"></div>
+                                        <div class="form-group"><label>Paid Fees</label><input type="number" class="form-input" id="editPaidFees" value="0"></div>
+                                        <div class="form-group"><label>Outstanding Fees</label><input type="number" class="form-input" id="editOutstandingFees" value="0" readonly></div>
+                                        <div class="form-group"><label>Last Payment Date</label><input type="date" class="form-input" id="editLastPayment"></div>
+                                    </div>
+                                    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                                         <button type="button" class="btn" style="background: var(--mid-gray); color: var(--text-color);" onclick="closeStudentEdit()">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="results-panel" id="studentmanager-results">
+                            Click "Edit" next to a student to see details or update them.
+                        </div>
+                    </div>
+
                     <div id="homework-demo" class="demo-content">
                         <h3 style="margin-bottom: 20px;">Daily Homework System</h3>
-                        <div class="demo-form">
-                            <select class="demo-input">
+                        <div class="demo-form-grid">
+                            <div class="form-group"><label>Class</label><select class="form-input">
                                 <option>Class 9-B</option>
                                 <option>Class 10-A</option>
                                 <option>Class 8-C</option>
-                            </select>
-                            <input type="text" class="demo-input" placeholder="Date" value="June 1, 2025">
+                            </select></div>
+                            <div class="form-group"><label>Date</label><input type="text" class="form-input" placeholder="June 1, 2025" value="June 1, 2025"></div>
                         </div>
-                        <textarea class="demo-textarea" placeholder="Enter homework for all subjects...">Math: Chapter 5, Exercise 5.2 (Problems 1-10)
+                         <div class="form-group"><label>Homework Details</label><textarea class="form-input form-textarea" placeholder="Enter homework for all subjects...">Math: Chapter 5, Exercise 5.2 (Problems 1-10)
 Science: Complete lab worksheet on Acids & Bases
 English: Essay on "Environmental Conservation" (200 words)
-Social: Read Chapter 8, answer questions 1-5</textarea>
-                        <button class="demo-btn" onclick="simulateHomeworkDemo()">Send to All Parents</button>
+Social: Read Chapter 8, answer questions 1-5</textarea></div>
+                        <button class="btn btn-primary" onclick="simulateHomeworkDemo()">Send to All Parents</button>
                         <div class="results-panel" id="homework-results">
                             Type homework and click "Send to All Parents" to see the message
                         </div>
                     </div>
-                    
+
                     <div id="meeting-demo" class="demo-content">
                         <h3 style="margin-bottom: 20px;">PTM Booking System</h3>
-                        <div class="demo-form">
-                            <input type="text" class="demo-input" placeholder="Teacher Name" value="Mrs. Priya Sharma">
-                            <input type="text" class="demo-input" placeholder="Subject" value="Mathematics">
-                            <input type="date" class="demo-input" placeholder="Meeting Date" value="2025-06-10">
-                            <input type="time" class="demo-input" placeholder="Start Time" value="14:00">
+                        <div class="demo-form-grid">
+                             <div class="form-group"><label>Teacher Name</label><input type="text" class="form-input" placeholder="Mrs. Priya Sharma" value="Mrs. Priya Sharma"></div>
+                             <div class="form-group"><label>Subject</label><input type="text" class="form-input" placeholder="Mathematics" value="Mathematics"></div>
+                             <div class="form-group"><label>Meeting Date</label><input type="date" class="form-input" placeholder="2025-06-10" value="2025-06-10"></div>
+                             <div class="form-group"><label>Start Time</label><input type="time" class="form-input" placeholder="14:00" value="14:00"></div>
                         </div>
-                        <button class="demo-btn" onclick="simulateMeetingDemo()">Create Booking Link</button>
+                        <button class="btn btn-primary" onclick="simulateMeetingDemo()">Create Booking Link</button>
                         <div class="results-panel" id="meeting-results">
                             Fill the details and click "Create Booking Link" to generate parent message
                         </div>
                     </div>
                     <div id="adminnotice-demo" class="demo-content">
                         <h3 style="margin-bottom: 20px;">Admin Notice Demo</h3>
-                        <div class="demo-form">
-                            <select class="demo-input" id="adminNoticeTarget">
+                        <div class="demo-form-grid">
+                            <div class="form-group"><label>Target Audience</label><select class="form-input" id="adminNoticeTarget">
                                 <option value="teachers">All Teachers</option>
                                 <option value="students">All Students</option>
                                 <option value="class">Specific Class</option>
                                 <option value="candidates">Specific Candidates</option>
-                            </select>
-                            <input type="text" class="demo-input" placeholder="Class or Candidate Names (if applicable)" id="adminNoticeClass" style="display:none;">
+                            </select></div>
+                            <div class="form-group" id="adminNoticeClassGroup" style="display:none;"><label>Class or Candidates</label><input type="text" class="form-input" placeholder="Class or Candidate Names (if applicable)" id="adminNoticeClass"></div>
                         </div>
-                        <input type="text" class="demo-input" placeholder="Notice Title" value="Staff Meeting" id="adminNoticeTitle">
-                        <textarea class="demo-textarea" placeholder="Notice Message" id="adminNoticeMsg">All teachers are requested to attend the staff meeting at 3 PM in the main hall.</textarea>
-                        <button class="demo-btn" onclick="simulateAdminNoticeDemo()">Send Notice</button>
+                         <div class="form-group"><label>Notice Title</label><input type="text" class="form-input" placeholder="Notice Title" value="Staff Meeting" id="adminNoticeTitle"></div>
+                         <div class="form-group"><label>Notice Message</label><textarea class="form-input form-textarea" placeholder="Notice Message" id="adminNoticeMsg">All teachers are requested to attend the staff meeting at 3 PM in the main hall.</textarea></div>
+                        <button class="btn btn-primary" onclick="simulateAdminNoticeDemo()">Send Notice</button>
                         <div class="results-panel" id="adminnotice-results">
                             Fill the form and click "Send Notice" to see the preview
                         </div>
                     </div>
-                    <div id="syllabus-demo" class="demo-content">
+                     <div id="syllabus-demo" class="demo-content">
                         <h3 style="margin-bottom: 20px;">Smart Syllabus Planner</h3>
-                        <div style="margin-bottom: 15px;">
+                        <div style="margin-bottom: 15px; text-align:center;">
                             <button class="demo-tab active" id="create-plan-tab" onclick="toggleSyllabusMode('create')">Create Yearly Plan</button>
                             <button class="demo-tab" id="view-alerts-tab" onclick="toggleSyllabusMode('alerts')">View Teacher Alerts</button>
                         </div>
-                        
+
                         <div id="create-plan" class="syllabus-mode">
-                            <div class="demo-form">
-                                <input type="text" class="demo-input" placeholder="Academic Year" value="2025-2026">
-                                <select class="demo-input" id="termSelect">
+                            <div class="demo-form-grid">
+                                <div class="form-group"><label>Academic Year</label><input type="text" class="form-input" placeholder="2025-2026" value="2025-2026"></div>
+                                <div class="form-group"><label>Term</label><select class="form-input" id="termSelect">
                                     <option>Term 1 (April - September)</option>
                                     <option>Term 2 (October - March)</option>
-                                </select>
+                                </select></div>
                             </div>
-                            <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                                <h4 style="margin-bottom: 15px; color: #2d3748;">📚 Term 1 Syllabus Plan</h4>
-                                <div style="font-family: monospace; background: white; padding: 15px; border-radius: 4px; overflow-x: auto;">
+                            <div style="background: var(--light-gray); padding: 20px; border-radius: 8px; margin: 20px 0;">
+                                <h4 style="margin-bottom: 10px; color: var(--heading-color);">📚 Term 1 Syllabus Plan (Example)</h4>
+                                <div style="background: white; padding: 15px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; overflow-x: auto;">
                                     <div style="margin-bottom: 10px;"><strong>Mathematics</strong></div>
                                     <div style="padding-left: 20px;">
                                         Week 1-2: Algebra - Basic Concepts<br>
@@ -1473,26 +1372,26 @@ Social: Read Chapter 8, answer questions 1-5</textarea>
                                     </div>
                                 </div>
                             </div>
-                            <button class="demo-btn" onclick="createYearlyPlan()">Create & Schedule Alerts</button>
+                            <button class="btn btn-primary" onclick="createYearlyPlan()">Create & Schedule Alerts</button>
                         </div>
-                        
+
                         <div id="view-alerts" class="syllabus-mode" style="display: none;">
-                            <div style="background: #f8fafc; padding: 20px; border-radius: 8px;">
-                                <h4 style="margin-bottom: 15px; color: #2d3748;">📅 Upcoming Teacher Alerts</h4>
+                            <div style="background: var(--light-gray); padding: 20px; border-radius: 8px;">
+                                <h4 style="margin-bottom: 15px; color: var(--heading-color);">📅 Upcoming Teacher Alerts (Example)</h4>
                                 <div class="alert-list">
-                                    <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #4299e1;">
+                                    <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary-blue);">
                                         <strong>Week 1 (April 1-7)</strong><br>
                                         • Math: Start Algebra - Basic Concepts<br>
                                         • Science: Begin Physics - Motion<br>
                                         • English: Poetry Analysis
                                     </div>
-                                    <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #48bb78;">
+                                    <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--success-green);">
                                         <strong>Week 2 (April 8-14)</strong><br>
                                         • Math: Continue Algebra<br>
                                         • Science: Complete Motion topics<br>
                                         • English: Grammar Review
                                     </div>
-                                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #ed8936;">
+                                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid var(--warning-yellow);">
                                         <strong>Week 3 (April 15-21)</strong><br>
                                         • Math: Start Geometry - Triangles<br>
                                         • Science: Begin Chemistry - Atomic Structure<br>
@@ -1501,927 +1400,416 @@ Social: Read Chapter 8, answer questions 1-5</textarea>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="results-panel" id="syllabus-results">
                             Create a yearly plan to see how teachers receive automated topic alerts
                         </div>
                     </div>
                     <div id="assignment-demo" class="demo-content">
                         <h3 style="margin-bottom: 20px;">Exam Notification Demo</h3>
-                        <div class="demo-form">
-                            <input type="text" class="demo-input" placeholder="Class" value="9-B">
+                        <div class="demo-form-grid">
+                             <div class="form-group"><label>Class</label><input type="text" class="form-input" placeholder="9-B" value="9-B"></div>
                         </div>
-                        <textarea class="demo-textarea" id="examSchedule" placeholder="Enter exam schedule, e.g.:
+                         <div class="form-group"><label>Exam Schedule</label><textarea class="form-input form-textarea" id="examSchedule" placeholder="Enter exam schedule, e.g.:
 Math: 10 June, 10:00 AM
 Science: 12 June, 9:00 AM
 English: 14 June, 11:00 AM">Math: 10 June, 10:00 AM
 Science: 12 June, 9:00 AM
-English: 14 June, 11:00 AM</textarea>
-                        <button class="demo-btn" onclick="simulateExamNotifDemo()">Send Exam Schedule</button>
+English: 14 June, 11:00 AM</textarea></div>
+                        <button class="btn btn-primary" onclick="simulateExamNotifDemo()">Send Exam Schedule</button>
                         <div class="results-panel" id="assignment-results">
                             Enter the full exam schedule and click "Send Exam Schedule" to see the preview
                         </div>
                     </div>
-                    <div id="ptm-demo" class="demo-content">
+                     <div id="ptm-demo" class="demo-content">
                         <h3 style="margin-bottom: 20px;">PTM Scheduling Demo</h3>
-                        <div style="margin-bottom: 15px;">
+                         <div style="margin-bottom: 15px; text-align:center;">
                             <button class="demo-tab active" id="ptm-auto-tab" onclick="togglePTMMode('auto')">Automatic</button>
                             <button class="demo-tab" id="ptm-manual-tab" onclick="togglePTMMode('manual')">Manual</button>
                         </div>
                         <div id="ptm-auto" class="ptm-mode">
-                            <div class="demo-form">
-                                <input type="text" class="demo-input" placeholder="Class" value="9-B">
-                                <input type="date" class="demo-input" placeholder="PTM Date" value="2025-07-01">
-                                <input type="number" class="demo-input" placeholder="Number of Students" value="30">
+                            <div class="demo-form-grid">
+                                 <div class="form-group"><label>Class</label><input type="text" class="form-input" placeholder="9-B" value="9-B"></div>
+                                 <div class="form-group"><label>PTM Date</label><input type="date" class="form-input" placeholder="2025-07-01" value="2025-07-01"></div>
+                                 <div class="form-group"><label>Number of Students</label><input type="number" class="form-input" placeholder="30" value="30"></div>
                             </div>
-                            <button class="demo-btn" onclick="simulatePTMAutoDemo()">Auto-Schedule PTM</button>
+                            <button class="btn btn-primary" onclick="simulatePTMAutoDemo()">Auto-Schedule PTM</button>
                         </div>
                         <div id="ptm-manual" class="ptm-mode" style="display:none;">
-                            <div class="demo-form">
-                                <input type="text" class="demo-input" placeholder="Student Name" value="Rajesh Kumar">
-                                <input type="text" class="demo-input" placeholder="Parent Phone" value="+91-9876543210">
-                                <input type="date" class="demo-input" placeholder="PTM Date" value="2025-07-01">
-                                <input type="time" class="demo-input" placeholder="Time" value="10:00">
+                            <div class="demo-form-grid">
+                                 <div class="form-group"><label>Student Name</label><input type="text" class="form-input" placeholder="Rajesh Kumar" value="Rajesh Kumar"></div>
+                                 <div class="form-group"><label>Parent Phone</label><input type="text" class="form-input" placeholder="+91-9876543210" value="+91-9876543210"></div>
+                                 <div class="form-group"><label>PTM Date</label><input type="date" class="form-input" placeholder="2025-07-01" value="2025-07-01"></div>
+                                 <div class="form-group"><label>Time</label><input type="time" class="form-input" placeholder="10:00" value="10:00"></div>
                             </div>
-                            <button class="demo-btn" onclick="simulatePTMManualDemo()">Schedule for Student</button>
+                            <button class="btn btn-primary" onclick="simulatePTMManualDemo()">Schedule for Student</button>
                         </div>
                         <div class="results-panel" id="ptm-results">
                             Choose mode and fill the form, then click to see the preview
                         </div>
                     </div>
-                    <div id="emergency-demo" class="demo-content">
+                     <div id="emergency-demo" class="demo-content">
                         <h3 style="margin-bottom: 20px;">Emergency Notification Demo</h3>
-                        <div class="demo-form">
-                            <input type="text" class="demo-input" placeholder="Message" value="School will be closed tomorrow due to heavy rain.">
+                        <div class="demo-form-grid">
+                             <div class="form-group"><label>Message</label><input type="text" class="form-input" placeholder="School will be closed tomorrow due to heavy rain." value="School will be closed tomorrow due to heavy rain."></div>
                         </div>
-                        <button class="demo-btn" onclick="simulateEmergencyDemo()">Send Emergency Notification</button>
+                        <button class="btn btn-primary" onclick="simulateEmergencyDemo()">Send Emergency Notification</button>
                         <div class="results-panel" id="emergency-results">
                             Fill the form and click "Send Emergency Notification" to see the preview
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+    </section>
 
-        <!-- Student Manager Demo Tab -->
-        <div id="studentmanager-demo" class="demo-content">
-            <h3 style="margin-bottom: 20px;">Student Manager Demo</h3>
-            <div class="demo-form" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
-                <input type="text" class="demo-input" placeholder="Search by Name or Class" id="studentSearch" oninput="filterStudentList()">
+    <!-- Financial Dashboard Section -->
+    <section class="section dashboard-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Smart Financial Dashboard</h2>
+                <p>Gain complete visibility and control over fee collection and school finances with intuitive dashboards and reports.</p>
             </div>
-            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
-                <strong>Student List</strong>
-                <div id="studentList" style="margin-top: 10px;">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-            <div class="results-panel" id="studentmanager-results">
-                Search and edit student details to see the preview here.
-            </div>
-        </div>
 
-        <!-- Student Edit Modal/Drawer -->
-        <div id="studentEditModal" style="display:none; position:fixed; top:0; right:0; width:100%; max-width:420px; height:100%; background:white; box-shadow:-2px 0 20px rgba(0,0,0,0.15); z-index:2000; overflow-y:auto; transition:right 0.3s;">
-            <div style="padding:24px 20px 20px 20px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
-                <h3 style="margin:0; font-size:1.3rem; color:#2d3748;">Edit Student</h3>
-                <button onclick="closeStudentEdit()" style="background:none; border:none; font-size:1.5rem; color:#c53030; cursor:pointer;">&times;</button>
-            </div>
-            <form id="studentEditForm" style="padding:20px;">
-                <div style="margin-bottom:15px;">
-                    <label>Name</label>
-                    <input type="text" class="demo-input" id="editName" required>
-                </div>
-                <div style="margin-bottom:15px; display:flex; gap:10px;">
-                    <div style="flex:1;">
-                        <label>Roll No</label>
-                        <input type="text" class="demo-input" id="editRoll">
-                    </div>
-                    <div style="flex:1;">
-                        <label>Class</label>
-                        <input type="text" class="demo-input" id="editClass" required>
-                    </div>
-                </div>
-                <div style="margin-bottom:15px; display:flex; gap:10px;">
-                    <div style="flex:1;">
-                        <label>Gender</label>
-                        <select class="demo-input" id="editGender">
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div style="flex:1;">
-                        <label>Date of Birth</label>
-                        <input type="date" class="demo-input" id="editDOB">
-                    </div>
-                </div>
-                <div style="margin-bottom:15px;">
-                    <label>Parent Name</label>
-                    <input type="text" class="demo-input" id="editParentName">
-                </div>
-                <div style="margin-bottom:15px;">
-                    <label>Parent Contact</label>
-                    <input type="text" class="demo-input" id="editParentContact" required>
-                </div>
-                <div style="margin-bottom:15px;">
-                    <label>Address</label>
-                    <input type="text" class="demo-input" id="editAddress">
-                </div>
-                <div style="margin-bottom:15px; display:flex; gap:10px;">
-                    <div style="flex:1;">
-                        <label>Status</label>
-                        <select class="demo-input" id="editStatus">
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
-                            <option value="Alumni">Alumni</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="margin-bottom:15px; background:#f8fafc; padding:12px; border-radius:8px;">
-                    <strong>Fee Details</strong>
-                    <div style="display:flex; gap:10px; margin-top:10px;">
-                        <div style="flex:1;">
-                            <label>Total Fees</label>
-                            <input type="number" class="demo-input" id="editTotalFees">
-                        </div>
-                        <div style="flex:1;">
-                            <label>Paid</label>
-                            <input type="number" class="demo-input" id="editPaidFees">
-                        </div>
-                        <div style="flex:1;">
-                            <label>Outstanding</label>
-                            <input type="number" class="demo-input" id="editOutstandingFees" readonly>
-                        </div>
-                    </div>
-                    <div style="margin-top:10px;">
-                        <label>Last Payment Date</label>
-                        <input type="date" class="demo-input" id="editLastPayment">
-                    </div>
-                </div>
-                <div style="display:flex; gap:10px; margin-top:20px;">
-                    <button type="button" class="demo-btn" style="background:#e2e8f0; color:#2d3748;" onclick="closeStudentEdit()">Cancel</button>
-                    <button type="submit" class="demo-btn" style="background:#667eea; color:white;">Save Changes</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Benefits Showcase -->
-        <div class="slide">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-icon">🎉</div>
-                    <h2 class="slide-title">Immediate Benefits for Your School</h2>
-                </div>
-                <div class="benefits-showcase">
-                    <div class="benefit-card">
-                        <span class="benefit-icon">⏰</span>
-                        <h3 class="benefit-title">Save 5+ Hours Weekly</h3>
-                        <p class="benefit-desc">Eliminate manual calling and SMS sending</p>
-                    </div>
-                    <div class="benefit-card">
-                        <span class="benefit-icon">💰</span>
-                        <h3 class="benefit-title">Reduce Late Fees</h3>
-                        <p class="benefit-desc">Automated reminders improve collection by 40%</p>
-                    </div>
-                    <div class="benefit-card">
-                        <span class="benefit-icon">📚</span>
-                        <h3 class="benefit-title">Better Academic Results</h3>
-                        <p class="benefit-desc">Parents stay informed, students more accountable</p>
-                    </div>
-                    <div class="benefit-card">
-                        <span class="benefit-icon">👨‍👩‍👧‍👦</span>
-                        <h3 class="benefit-title">Higher Parent Satisfaction</h3>
-                        <p class="benefit-desc">Transparent communication builds trust</p>
-                    </div>
-                    <div class="benefit-card">
-                        <span class="benefit-icon">📱</span>
-                        <h3 class="benefit-title">Zero Learning Curve</h3>
-                        <p class="benefit-desc">Uses familiar messaging platform</p>
-                    </div>
-                    <div class="benefit-card">
-                        <span class="benefit-icon">🔧</span>
-                        <h3 class="benefit-title">Easy Setup</h3>
-                        <p class="benefit-desc">Live in 2 days, not 2 months</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Future Roadmap -->
-        <div class="slide">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-icon">🚀</div>
-                    <h2 class="slide-title">Future Roadmap</h2>
-                </div>
-                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px; color: #4a5568;">
-                    Exciting features coming soon to enhance your school's communication
-                </p>
-                <div class="demo-features">
-                    <div class="feature-demo">
-                        <div class="feature-number">🎂</div>
-                        <h3 class="feature-title">Birthday Wishes</h3>
-                        <p class="feature-description">
-                            Automated birthday greetings for students to create a more personal connection with families.
-                        </p>
-                        <div class="demo-preview">
-                            🎉 Personalized messages<br>
-                            📅 Auto-scheduled greetings<br>
-                            🎁 Optional gift suggestions<br>
-                            👨‍👩‍👧‍👦 Family engagement boost
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">🚫</div>
-                        <h3 class="feature-title">Absence Alerts</h3>
-                        <p class="feature-description">
-                            Instant notifications for student absence to ensure better attendance tracking and parent awareness.
-                        </p>
-                        <div class="demo-preview">
-                            ⚡ Real-time alerts<br>
-                            📱 Instant parent notification<br>
-                            📊 Attendance analytics<br>
-                            🔄 Auto-follow up system
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">📣</div>
-                        <h3 class="feature-title">Emergency Notices</h3>
-                        <p class="feature-description">
-                            One-click urgent announcements for critical school updates and emergency situations.
-                        </p>
-                        <div class="demo-preview">
-                            🚨 Priority messaging<br>
-                            📢 Bulk notifications<br>
-                            ✅ Delivery confirmation<br>
-                            📍 Location-based alerts
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">📊</div>
-                        <h3 class="feature-title">Report Card Summary</h3>
-                        <p class="feature-description">
-                            Digital report card notifications with detailed performance insights and improvement suggestions.
-                        </p>
-                        <div class="demo-preview">
-                            📈 Performance trends<br>
-                            📝 Subject-wise analysis<br>
-                            💡 Improvement tips<br>
-                            📱 Mobile-friendly view
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">🌐</div>
-                        <h3 class="feature-title">Multi-language Support</h3>
-                        <p class="feature-description">
-                            Support for regional languages to ensure effective communication with all parents.
-                        </p>
-                        <div class="demo-preview">
-                            🗣️ Multiple languages<br>
-                            🔄 Auto-translation<br>
-                            📱 Language preferences<br>
-                            🌍 Regional support
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">🎯</div>
-                        <h3 class="feature-title">AI-Powered Insights</h3>
-                        <p class="feature-description">
-                            Smart analytics and predictions to improve student performance and school operations.
-                        </p>
-                        <div class="demo-preview">
-                            📊 Performance predictions<br>
-                            🎯 Personalized recommendations<br>
-                            📈 Trend analysis<br>
-                            🔮 Future performance insights
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">🎨</div>
-                        <h3 class="feature-title">Custom Branding</h3>
-                        <p class="feature-description">
-                            School-specific branding and customization options for a unique identity.
-                        </p>
-                        <div class="demo-preview">
-                            🎨 Custom themes<br>
-                            📱 School app branding<br>
-                            🎯 Personalized templates<br>
-                            🌈 Brand color schemes
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">🤖</div>
-                        <h3 class="feature-title">AI Chat Assistant</h3>
-                        <p class="feature-description">
-                            24/7 automated support for common queries and information requests.
-                        </p>
-                        <div class="demo-preview">
-                            💬 Instant responses<br>
-                            📚 FAQ automation<br>
-                            🎯 Smart routing<br>
-                            📊 Query analytics
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">📱</div>
-                        <h3 class="feature-title">Mobile App</h3>
-                        <p class="feature-description">
-                            Dedicated mobile applications for schools, teachers, and parents.
-                        </p>
-                        <div class="demo-preview">
-                            📱 iOS & Android apps<br>
-                            🔔 Push notifications<br>
-                            📊 Offline access<br>
-                            🔐 Secure login
-                        </div>
-                    </div>
-                    
-                    <div class="feature-demo">
-                        <div class="feature-number">🎓</div>
-                        <h3 class="feature-title">Virtual Classroom</h3>
-                        <p class="feature-description">
-                            Integrated video conferencing and online learning tools.
-                        </p>
-                        <div class="demo-preview">
-                            🎥 Live classes<br>
-                            📝 Digital whiteboard<br>
-                            📚 Resource sharing<br>
-                            📊 Attendance tracking
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Call to Action -->
-        <div class="slide cta-section">
-            <h2 class="cta-title">Ready to See This in Your School?</h2>
-            <p class="cta-text">
-                Join the demo session and experience how this system can transform your school's communication.<br>
-                <strong>Free trial • No commitments • See results in 48 hours</strong>
-            </p>
-            <div class="cta-buttons">
-                <button class="cta-btn primary" onclick="requestDemo()">Schedule Live Demo</button>
-                <button class="cta-btn secondary" onclick="getQuote()">Get Custom Quote</button>
-            </div>
-        </div>
-
-        <!-- Feedback Form Section -->
-        <div class="slide feedback-section">
-            <div class="feedback-container">
-                <div class="slide-header" style="text-align: center; margin-bottom: 40px;">
-                    <div class="slide-icon" style="font-size: 3rem; margin-bottom: 20px;">💬</div>
-                    <h2 class="slide-title" style="color: white;">Get Started Today</h2>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
-                        Transform your school's communication system and join the digital education revolution
-                    </p>
-                </div>
-                
-                <div class="feedback-form">
-                    <form id="feedbackForm" onsubmit="submitFeedback(event)">
-                        <div class="form-group">
-                            <label class="form-label">School Name</label>
-                            <input type="text" class="form-input" id="schoolName" required placeholder="Enter your school name">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Contact Person</label>
-                            <input type="text" class="form-input" id="contactName" required placeholder="Enter contact person name">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Phone Number</label>
-                            <input type="tel" class="form-input" id="contactPhone" required placeholder="Enter phone number">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-input" id="contactEmail" required placeholder="Enter email address">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Number of Students</label>
-                            <input type="number" class="form-input" id="studentCount" required placeholder="Enter total number of students">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Message</label>
-                            <textarea class="form-input form-textarea" id="message" required placeholder="Tell us about your school's needs and challenges"></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">
-                            <span class="whatsapp-icon">📱</span>
-                            Send Message via WhatsApp
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add after Demo Features section -->
-        <div class="slide dashboard-section">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-icon">💰</div>
-                    <h2 class="slide-title">Smart Financial Dashboard</h2>
-                </div>
-                <p style="text-align: center; margin-bottom: 30px; color: #4a5568;">
-                    Complete fee tracking and financial insights for better school management
-                </p>
-
-                <div class="dashboard-grid">
-                    <div class="dashboard-card">
-                        <div class="dashboard-header">
-                            <div class="dashboard-title">Total Fee Collection</div>
-                            <div class="dashboard-trend">↑ 15% vs last month</div>
-                        </div>
-                        <div class="dashboard-value">₹8,45,000</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 85%"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; color: #4a5568; font-size: 0.9rem;">
-                            <span>Target: ₹10,00,000</span>
-                            <span>85% Collected</span>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <div class="dashboard-header">
-                            <div class="dashboard-title">Pending Payments</div>
-                            <div class="dashboard-trend negative">↑ 5% vs last month</div>
-                        </div>
-                        <div class="dashboard-value">₹1,55,000</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 15%"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; color: #4a5568; font-size: 0.9rem;">
-                            <span>Total Pending</span>
-                            <span>15% Outstanding</span>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <div class="dashboard-header">
-                            <div class="dashboard-title">Collection Efficiency</div>
-                            <div class="dashboard-trend">↑ 8% vs last month</div>
-                        </div>
-                        <div class="dashboard-value">92%</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 92%"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; color: #4a5568; font-size: 0.9rem;">
-                            <span>On-time Payments</span>
-                            <span>92% Success Rate</span>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <div class="dashboard-header">
-                            <div class="dashboard-title">Recent Transactions</div>
-                            <div class="dashboard-trend">Last 7 days</div>
-                        </div>
-                        <div class="fee-list">
-                            <div class="fee-item">
-                                <div>
-                                    <div style="font-weight: 500;">Rajesh Kumar</div>
-                                    <div style="font-size: 0.9rem; color: #4a5568;">Class 9-B</div>
-                                </div>
-                                <div>
-                                    <div style="font-weight: 500;">₹25,000</div>
-                                    <div class="fee-status status-paid">Paid</div>
-                                </div>
-                            </div>
-                            <div class="fee-item">
-                                <div>
-                                    <div style="font-weight: 500;">Priya Sharma</div>
-                                    <div style="font-size: 0.9rem; color: #4a5568;">Class 10-A</div>
-                                </div>
-                                <div>
-                                    <div style="font-weight: 500;">₹28,000</div>
-                                    <div class="fee-status status-pending">Pending</div>
-                                </div>
-                            </div>
-                            <div class="fee-item">
-                                <div>
-                                    <div style="font-weight: 500;">Amit Patel</div>
-                                    <div style="font-size: 0.9rem; color: #4a5568;">Class 8-C</div>
-                                </div>
-                                <div>
-                                    <div style="font-weight: 500;">₹22,000</div>
-                                    <div class="fee-status status-overdue">Overdue</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dashboard-card" style="margin-top: 30px;">
+            <div class="dashboard-grid">
+                <div class="dashboard-card green">
                     <div class="dashboard-header">
-                        <div class="dashboard-title">Fee Collection Analytics</div>
-                        <div class="dashboard-trend">Monthly Overview</div>
+                        <div class="dashboard-title">Total Fee Collection</div>
+                        <div class="dashboard-trend"><i class="fas fa-arrow-up"></i> 15% vs last month</div>
                     </div>
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 20px;">
-                        <div>
-                            <div style="font-size: 0.9rem; color: #4a5568;">Total Students</div>
-                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">450</div>
+                    <div class="dashboard-value">₹8,45,000</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                    <div class="list-info">
+                        <span>Target: ₹10,00,000</span>
+                        <span>85% Collected</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card red">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Pending Payments</div>
+                        <div class="dashboard-trend negative"><i class="fas fa-arrow-up"></i> 5% vs last month</div>
+                    </div>
+                    <div class="dashboard-value">₹1,55,000</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 15%"></div>
+                    </div>
+                    <div class="list-info">
+                        <span>Total Pending</span>
+                        <span>15% Outstanding</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card green">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Collection Efficiency</div>
+                        <div class="dashboard-trend"><i class="fas fa-arrow-up"></i> 8% vs last month</div>
+                    </div>
+                    <div class="dashboard-value">92%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                    <div class="list-info">
+                        <span>On-time Payments</span>
+                        <span>92% Success Rate</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Recent Transactions</div>
+                        <div class="dashboard-trend">Last 7 days</div>
+                    </div>
+                    <div class="fee-list">
+                        <div class="fee-item">
+                            <div>
+                                <div class="name">Rajesh Kumar</div>
+                                <div style="font-size: 0.9em; color: var(--dark-gray);">Class 9-B</div>
+                            </div>
+                            <div>
+                                <div class="amount">₹25,000</div>
+                                <div class="fee-status status-paid">Paid</div>
+                            </div>
                         </div>
-                        <div>
-                            <div style="font-size: 0.9rem; color: #4a5568;">Paid Students</div>
-                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">382</div>
+                        <div class="fee-item">
+                            <div>
+                                <div class="name">Priya Sharma</div>
+                                <div style="font-size: 0.9em; color: var(--dark-gray);">Class 10-A</div>
+                            </div>
+                            <div>
+                                <div class="amount">₹28,000</div>
+                                <div class="fee-status status-pending">Pending</div>
+                            </div>
                         </div>
-                        <div>
-                            <div style="font-size: 0.9rem; color: #4a5568;">Pending Students</div>
-                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">45</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 0.9rem; color: #4a5568;">Overdue Students</div>
-                            <div style="font-size: 1.5rem; font-weight: bold; color: #2d3748;">23</div>
+                        <div class="fee-item">
+                            <div>
+                                <div class="name">Amit Patel</div>
+                                <div style="font-size: 0.9em; color: var(--dark-gray);">Class 8-C</div>
+                            </div>
+                            <div>
+                                <div class="amount">₹22,000</div>
+                                <div class="fee-status status-overdue">Overdue</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Add Modal for Demo Request -->
-    <div id="demoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
-        <div style="background: white; width: 90%; max-width: 500px; margin: 50px auto; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
-            <h2 style="margin-bottom: 20px; color: #2d3748;">Request Live Demo</h2>
-            <form id="demoRequestForm" onsubmit="submitDemoRequest(event)">
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">School Name</label>
-                    <input type="text" id="schoolName" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
+            <div class="dashboard-card" style="margin-top: 30px;">
+                <div class="dashboard-header">
+                    <div class="dashboard-title">Fee Collection Analytics</div>
+                    <div class="dashboard-trend">Monthly Overview</div>
                 </div>
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Contact Person Name</label>
-                    <input type="text" id="contactName" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
+                <div class="analytics-grid">
+                    <div class="analytics-item">
+                        <h4>Total Students</h4>
+                        <p>450</p>
+                    </div>
+                    <div class="analytics-item">
+                        <h4>Paid Students</h4>
+                        <p>382</p>
+                    </div>
+                    <div class="analytics-item">
+                        <h4>Pending Students</h4>
+                        <p>45</p>
+                    </div>
+                    <div class="analytics-item">
+                        <h4>Overdue Students</h4>
+                        <p>23</p>
+                    </div>
                 </div>
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Phone Number</label>
-                    <input type="tel" id="contactPhone" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Email</label>
-                    <input type="email" id="contactEmail" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; color: #4a5568;">Number of Students</label>
-                    <input type="number" id="studentCount" required style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
-                </div>
-                <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                    <button type="button" onclick="closeDemoModal()" style="padding: 10px 20px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer;">Cancel</button>
-                    <button type="submit" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer;">Submit Request</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="section bg-gradient text-center">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 20px;">Ready to Transform Your School Management?</h2>
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px auto;">
+                Join Eduno and experience how our comprehensive platform can streamline your entire school operations.
+            </p>
+            <div class="hero-ctas" style="display: flex; gap: 20px; justify-content: center;">
+                <a href="contact.html" class="btn btn-primary">Schedule Live Demo</a>
+                <a href="contact.html" class="btn btn-secondary">Get Custom Quote</a>
+            </div>
+        </div>
+    </section>
 
     <script>
+        // Helper function to show a specific demo tab
         function showDemo(demoType) {
-            document.querySelectorAll('.demo-content').forEach(content => {
-                content.classList.remove('active');
+            // Hide all demo content sections
+            document.querySelectorAll('.demo-content').forEach(section => {
+                section.classList.remove('active');
             });
+
+            // Deactivate all demo tabs
             document.querySelectorAll('.demo-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            document.getElementById(demoType + '-demo').classList.add('active');
-            event.target.classList.add('active');
+
+            // Show the selected demo content section
+            const selectedDemo = document.getElementById(demoType + '-demo');
+            if (selectedDemo) {
+                selectedDemo.classList.add('active');
+            }
+
+            // Activate the corresponding tab
+            const selectedTab = document.querySelector('.demo-tab[onclick="showDemo(\'' + demoType + '\')"]');
+             if (selectedTab) {
+                 selectedTab.classList.add('active');
+             }
+
+            // Reset results panel
+            const resultsPanel = document.getElementById(demoType + '-results');
+             if (resultsPanel) {
+                 resultsPanel.innerHTML = 'Fill the form and click the button to see the preview'; // Generic message
+             }
         }
 
+        // Show the first demo tab (Fee Management) by default on load
+        document.addEventListener('DOMContentLoaded', () => {
+            showDemo('fees');
+            renderStudentList(); // Render student list for Student Manager demo
+        });
+
+
+        // Fee Management Demo Functions
         function toggleFeeMode(mode) {
-            const singleEntry = document.getElementById('single-entry');
-            const bulkEntry = document.getElementById('bulk-entry');
-            const singleTab = document.getElementById('single-tab');
-            const bulkTab = document.getElementById('bulk-tab');
-            
-            if (mode === 'single') {
-                singleEntry.style.display = 'block';
-                bulkEntry.style.display = 'none';
-                singleTab.classList.add('active');
-                bulkTab.classList.remove('active');
-            } else {
-                singleEntry.style.display = 'none';
-                bulkEntry.style.display = 'block';
-                singleTab.classList.remove('active');
-                bulkTab.classList.add('active');
-            }
-            
-            // Clear results when switching modes
-            document.getElementById('fee-results').innerHTML = 
-                mode === 'single' ? 
-                'Fill the form and click "Send Fee Reminder" to see the message preview' :
-                'Upload CSV or download sample to see bulk processing preview';
+            document.getElementById('single-entry').style.display = mode === 'single' ? 'block' : 'none';
+            document.getElementById('bulk-entry').style.display = mode === 'bulk' ? 'block' : 'none';
+            document.getElementById('single-tab').classList.toggle('active', mode === 'single');
+            document.getElementById('bulk-tab').classList.toggle('active', mode === 'bulk');
+            document.getElementById('fee-results').innerHTML = 'Choose Single Entry or Bulk Upload to see automated message previews';
         }
 
         function simulateSingleFeeDemo() {
-            const result = document.getElementById('fee-results');
-            const studentName = document.querySelector('#single-entry input[placeholder="Student Name"]').value;
-            const parentPhone = document.querySelector('#single-entry input[placeholder="Parent Phone"]').value;
-            const feeAmount = document.querySelector('#single-entry input[placeholder="Fee Amount"]').value;
-            const dueDate = document.querySelector('#single-entry input[placeholder="Due Date"]').value;
-            
-            const formattedDate = new Date(dueDate).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            
-            result.innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Fee Reminder Sent!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>To:</strong> ${parentPhone}<br><br>
-                    <strong>Message:</strong><br>
-                    "Dear Parent,<br>
-                    Fee payment of ₹${feeAmount} for ${studentName} is due by ${formattedDate}.<br>
-                    Please ensure timely payment.<br>
-                    Please ignore if already paid.<br>
-                    - ABC School"
+            const name = document.querySelector('#single-entry input[placeholder="Rajesh Kumar"]').value;
+            const phone = document.querySelector('#single-entry input[placeholder="+91-9876543210"]').value;
+            const amount = document.querySelector('#single-entry input[placeholder="2500"]').value;
+            const dueDate = document.querySelector('#single-entry input[placeholder="2025-06-15"]').value;
+            document.getElementById('fee-results').innerHTML = `
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Automated Reminder Preview:</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    Dear Parent of <strong>${name}</strong>,<br>
+                    Just a friendly reminder that the school fee of ₹${amount} is due on ${dueDate}. Please make the payment by the due date to avoid late fees. Thank you!<br>
+                    For any queries, reply to this message or contact the school office.<br>
+                    <br>
+                    Regards,<br>
+                    [Your School Name]
                 </div>
-                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
-                    📅 Auto-reminders scheduled: 7 days before & 3 days after due date
-                </p>
             `;
         }
 
         function simulateBulkFeeDemo() {
-            const result = document.getElementById('fee-results');
-            result.innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ CSV Processed Successfully!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>📊 Processing Summary:</strong><br>
-                    • Total Records: 150 students<br>
-                    • Valid Entries: 148 students<br>
-                    • Invalid Entries: 2 (missing phone numbers)<br><br>
-                    <strong>📅 Reminders Scheduled:</strong><br>
-                    • 148 × 3 = 444 total messages<br>
-                    • 7 days before due date: 148 reminders<br>
-                    • Due date: 148 reminders<br>
-                    • 3 days after: 148 final notices<br><br>
-                    <strong>💰 Fee Collection Target:</strong> ₹3,70,000
+             document.getElementById('fee-results').innerHTML = `
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Bulk Processing Simulation:</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    Processing uploaded CSV file...<br>
+                    Sending reminders to all parents listed in the file.<br>
+                    Example messages:<br>
+                    - Dear Parent of Rajesh Kumar, fee of ₹2500 is due 2025-06-15...<br>
+                    - Dear Parent of Priya Sharma, fee of ₹3000 is due 2025-06-15...<br>
+                    - Dear Parent of Amit Patel, fee of ₹2500 is due 2025-06-15...
                 </div>
-                <div style="background: #fff3cd; padding: 10px; border-radius: 4px; margin-top: 10px; border-left: 4px solid #ffc107;">
-                    <strong>⚠️ Validation Errors:</strong><br>
-                    Row 15: Invalid phone number format<br>
-                    Row 47: Missing due date
-                </div>
-                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
-                    ⏱️ Processing time: 2.3 seconds • All messages queued for delivery
-                </p>
             `;
         }
 
         function downloadSampleCSV() {
-            const csvContent = `Student Name,Parent Phone,Fee Amount,Due Date
-Rajesh Kumar,+91-9876543210,2500,2025-06-15
-Priya Sharma,+91-9876543221,3000,2025-06-15
-Amit Patel,+91-9876543232,2500,2025-06-15
-Sneha Reddy,+91-9876543243,2800,2025-06-15
-Rohit Singh,+91-9876543254,2500,2025-06-15`;
-            
+            const csvContent = "Student Name,Parent Phone,Fee Amount,Due Date\nRajesh Kumar,+91-9876543210,2500,2025-06-15\nPriya Sharma,+91-9876543211,3000,2025-06-15\nAmit Patel,+91-9876543212,2500,2025-06-15";
             const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'fee_reminders_sample.csv';
+            a.download = 'sample_fee_data.csv';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            
-            // Show feedback
-            alert('📋 Sample CSV downloaded!\n\n✅ Open in Excel or Google Sheets\n📝 Replace with your student data\n💾 Save as CSV format\n📤 Upload back to system');
+            URL.revokeObjectURL(url);
         }
 
-        function simulateFeDemo() {
-            // This function is kept for backward compatibility
-            simulateSingleFeeDemo();
-        }
-
+        // Homework Demo Function
         function simulateHomeworkDemo() {
-            const result = document.getElementById('homework-results');
-            result.innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Sent to 28 Parents in Class 9-B</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Homework for Class 9-B - June 1, 2025</strong><br><br>
-                    📘 <strong>Math:</strong> Chapter 5, Exercise 5.2 (Problems 1-10)<br>
-                    🔬 <strong>Science:</strong> Complete lab worksheet on Acids & Bases<br>
-                    ✍️ <strong>English:</strong> Essay on "Environmental Conservation" (200 words)<br>
-                    🌍 <strong>Social:</strong> Read Chapter 8, answer questions 1-5<br><br>
-                    <em>- Mrs. Priya (Class Teacher)</em>
+            const className = document.querySelector('#homework-demo select').value;
+            const date = document.querySelector('#homework-demo input[type="text"]').value;
+            const homework = document.querySelector('#homework-demo textarea').value;
+            document.getElementById('homework-results').innerHTML = `
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Homework Alert Preview:</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    Dear Parents of <strong>${className}</strong> students,<br>
+                    Here is the homework for today, ${date}:<br>
+                    <pre style="white-space: pre-wrap; margin: 8px 0; font-family: inherit;">${homework}</pre>
+                    Please ensure your child completes the assigned tasks.<br>
+                    <br>
+                    Regards,<br>
+                    [Class Teacher Name]
                 </div>
-                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
-                    📊 Delivery Status: 28 delivered, 0 failed • Sent in 3.2 seconds
-                </p>
             `;
         }
 
+        // Meeting Booking Demo Function
         function simulateMeetingDemo() {
-            const result = document.getElementById('meeting-results');
-            const teacherName = document.querySelector('#meeting-demo input[placeholder="Teacher Name"]').value;
-            const subject = document.querySelector('#meeting-demo input[placeholder="Subject"]').value;
-            const date = document.querySelector('#meeting-demo input[placeholder="Meeting Date"]').value;
-            const time = document.querySelector('#meeting-demo input[placeholder="Start Time"]').value;
-            
-            const formattedDate = new Date(date).toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            
-            const bookingLink = `https://school-meet.com/book/${teacherName.toLowerCase().replace(/\s+/g, '-')}-${subject.toLowerCase()}-${date}`;
-            
-            result.innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Booking Link Created & Sent!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Message sent to all parents:</strong><br><br>
-                    "Parent-Teacher Meeting with ${teacherName} (${subject})<br>
-                    📅 Date: ${formattedDate}<br>
-                    🕐 Time: ${time} onwards<br><br>
-                    Book your 10-minute slot: [Booking Link]<br>
-                    First come, first served basis.<br><br>
-                    - ABC School Administration"
+            const teacher = document.querySelector('#meeting-demo input[placeholder="Mrs. Priya Sharma"]').value;
+            const subject = document.querySelector('#meeting-demo input[placeholder="Mathematics"]').value;
+            const date = document.querySelector('#meeting-demo input[type="date"]').value;
+            const time = document.querySelector('#meeting-demo input[type="time"]').value;
+            const bookingLink = `https://eduno.example.com/book?teacher=${encodeURIComponent(teacher)}&date=${date}&time=${time}`;
+
+            document.getElementById('meeting-results').innerHTML = `
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Booking Link Preview:</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    Dear Parent,<br>
+                    You can now book a meeting slot with <strong>${teacher}</strong> (${subject}) on ${date} at ${time}.<br>
+                    Please use the link below to confirm your slot:<br>
+                    <a href="${bookingLink}" target="_blank" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">${bookingLink}</a><br>
+                    <br>
+                    Regards,<br>
+                    [Your School Name]
                 </div>
-                <div class="booking-link">
-                    <strong>🔗 Booking Link:</strong><br>
-                    <a href="${bookingLink}" target="_blank">${bookingLink}</a>
-                </div>
-                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
-                    📊 Available Slots: 12 (10 mins each)
-                </p>
             `;
         }
 
-        function requestDemo() {
-            document.getElementById('demoModal').style.display = 'block';
-        }
-
-        function closeDemoModal() {
-            document.getElementById('demoModal').style.display = 'none';
-        }
-
-        function submitDemoRequest(event) {
-            event.preventDefault();
-            
-            const schoolName = document.getElementById('schoolName').value;
-            const contactName = document.getElementById('contactName').value;
-            const contactPhone = document.getElementById('contactPhone').value;
-            const contactEmail = document.getElementById('contactEmail').value;
-            const studentCount = document.getElementById('studentCount').value;
-
-            // Create message for WhatsApp
-            const message = `New Demo Request:\n\nSchool: ${schoolName}\nContact: ${contactName}\nPhone: ${contactPhone}\nEmail: ${contactEmail}\nStudents: ${studentCount}`;
-            
-            // Create WhatsApp link
-            const whatsappLink = `https://wa.me/917036771268?text=${encodeURIComponent(message)}`;
-            
-            // Open WhatsApp in new tab
-            window.open(whatsappLink, '_blank');
-            
-            // Close modal and show confirmation
-            closeDemoModal();
-            alert('Thank you for your interest! We will contact you shortly.');
-            
-            // Reset form
-            document.getElementById('demoRequestForm').reset();
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('demoModal');
-            if (event.target == modal) {
-                closeDemoModal();
-            }
-        }
-
-        // Add smooth scrolling animation on page load
-        window.addEventListener('load', function() {
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach((slide, index) => {
-                slide.style.animationDelay = `${index * 0.2}s`;
-            });
-        });
-
-        function submitFeedback(event) {
-            event.preventDefault();
-            
-            const schoolName = document.getElementById('schoolName').value;
-            const contactName = document.getElementById('contactName').value;
-            const contactPhone = document.getElementById('contactPhone').value;
-            const contactEmail = document.getElementById('contactEmail').value;
-            const studentCount = document.getElementById('studentCount').value;
-            const message = document.getElementById('message').value;
-
-            // Create WhatsApp message
-            const whatsappMessage = `New School Inquiry:\n\nSchool: ${schoolName}\nContact: ${contactName}\nPhone: ${contactPhone}\nEmail: ${contactEmail}\nStudents: ${studentCount}\n\nMessage:\n${message}`;
-            
-            // Create WhatsApp link
-            const whatsappLink = `https://wa.me/917036771268?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            // Open WhatsApp
-            window.open(whatsappLink, '_blank');
-            
-            // Reset form
-            document.getElementById('feedbackForm').reset();
-            
-            // Show confirmation
-            alert('Thank you for your interest! We will contact you shortly.');
-        }
-
+         // Admin Notice Demo Function
         function simulateAdminNoticeDemo() {
             const target = document.getElementById('adminNoticeTarget').value;
-            const classOrNames = document.getElementById('adminNoticeClass').value;
+            const classCandidates = document.getElementById('adminNoticeClass').value;
             const title = document.getElementById('adminNoticeTitle').value;
             const message = document.getElementById('adminNoticeMsg').value;
-            let recipient = '';
-            if(target === 'teachers') recipient = 'All Teachers';
-            else if(target === 'students') recipient = 'All Students';
-            else if(target === 'class') recipient = `Class: ${classOrNames}`;
-            else if(target === 'candidates') recipient = `Candidates: ${classOrNames}`;
+
+            let targetText = target === 'teachers' ? 'All Teachers' : target === 'students' ? 'All Students' : target === 'class' ? `Class: ${classCandidates}` : `Candidates: ${classCandidates}`;
+
             document.getElementById('adminnotice-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Notice Sent!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>To:</strong> ${recipient}<br>
-                    <strong>Title:</strong> ${title}<br>
-                    <strong>Message:</strong> ${message}
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Admin Notice Preview:</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    <strong>To:</strong> ${targetText}<br>
+                    <strong>Subject:</strong> ${title}<br>
+                    <br>
+                    ${message.replace(/\n/g, '<br>')}<br>
+                    <br>
+                    Regards,<br>
+                    [Principal/Admin Name]
                 </div>
             `;
         }
 
-        function simulateSyllabusDemo() {
-            const subject = document.querySelector('#syllabus-demo input[placeholder="Subject"]').value;
-            const topic = document.querySelector('#syllabus-demo input[placeholder="Topic"]').value;
-            const week = document.querySelector('#syllabus-demo input[placeholder="Week Start"]').value;
+        document.getElementById('adminNoticeTarget').addEventListener('change', function() {
+            const val = this.value;
+            const classInputGroup = document.getElementById('adminNoticeClassGroup');
+            classInputGroup.style.display = (val === 'class' || val === 'candidates') ? 'block' : 'none';
+        });
+
+        // Syllabus Planner Demo Functions
+        function toggleSyllabusMode(mode) {
+            document.getElementById('create-plan').style.display = mode === 'create' ? 'block' : 'none';
+            document.getElementById('view-alerts').style.display = mode === 'alerts' ? 'block' : 'none';
+            document.getElementById('create-plan-tab').classList.toggle('active', mode === 'create');
+            document.getElementById('view-alerts-tab').classList.toggle('active', mode === 'alerts');
+            // Optional: Clear results panel or show specific message based on mode
+             document.getElementById('syllabus-results').innerHTML = mode === 'create' ? 'Create a yearly plan to see how teachers receive automated topic alerts' : 'View upcoming teacher alerts simulation';
+        }
+
+        function createYearlyPlan() {
+            const year = document.querySelector('#create-plan input[placeholder="2025-2026"]').value;
+            const term = document.getElementById('termSelect').value;
+
             document.getElementById('syllabus-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Teacher Notified!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Subject:</strong> ${subject}<br>
-                    <strong>Topic:</strong> ${topic}<br>
-                    <strong>Week:</strong> ${week}
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Yearly Plan Created & Alerts Scheduled!</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    <strong>Academic Year:</strong> ${year}<br>
+                    <strong>Term:</strong> ${term}<br><br>
+                    <strong>📢 Teacher Alerts Scheduled (Simulation):</strong><br>
+                    • Weekly topic reminders to all relevant teachers<br>
+                    • Daily preparation tips & resource links<br>
+                    • Progress tracking notifications<br><br>
+                    <strong>Next Alert:</strong> Week 1 topics (${term.includes('Term 1') ? 'April 1-7' : 'October 1-7'})
                 </div>
+                <p style="margin-top: 10px; color: var(--text-color); font-size: 0.9rem;">
+                    Teachers will receive automated alerts about topics to cover, resources needed, and preparation tips.
+                </p>
             `;
         }
 
-        function simulateBulkRegDemo() {
-            document.getElementById('bulkreg-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Bulk Registration Processed!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Summary:</strong><br>
-                    • 120 students registered<br>
-                    • 5 with discounts<br>
-                    • Data synced with Google Sheets
-                </div>
-            `;
-        }
-
-        function simulateUserMapDemo() {
-            const teacher = document.querySelector('#usermap-demo input[placeholder="Teacher Name"]').value;
-            const classes = document.querySelector('#usermap-demo input[placeholder="Classes"]').value;
-            document.getElementById('usermap-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ User Mapping Updated!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Teacher:</strong> ${teacher}<br>
-                    <strong>Classes:</strong> ${classes}
-                </div>
-            `;
-        }
-
-        function simulateAssignmentDemo() {
-            const className = document.querySelector('#assignment-demo input[placeholder="Class"]').value;
+        // Exam Notification Demo Function
+        function simulateExamNotifDemo() {
+            const className = document.querySelector('#assignment-demo input[placeholder="9-B"]').value;
             const schedule = document.getElementById('examSchedule').value;
             document.getElementById('assignment-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Exam Schedule Sent!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Class:</strong> ${className}<br>
-                    <strong>Exam Schedule:</strong><br><pre style="background:none;border:none;margin:0;padding:0;font-family:inherit;">${schedule}</pre>
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Exam Schedule Sent!</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    Dear Students and Parents of <strong>${className}</strong>,<br>
+                    Please find the upcoming exam schedule below:<br>
+                    <pre style="white-space: pre-wrap; margin: 8px 0; font-family: inherit;">${schedule}</pre>
+                    Please prepare accordingly. Best of luck!<br>
+                    <br>
+                    Regards,<br>
+                    [Your School Name]
                 </div>
             `;
         }
 
-        function simulatePTMDemo() {
-            const className = document.querySelector('#ptm-demo input[placeholder="Class"]').value;
-            const date = document.querySelector('#ptm-demo input[placeholder="PTM Date"]').value;
-            document.getElementById('ptm-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ PTM Scheduled!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Class:</strong> ${className}<br>
-                    <strong>Date:</strong> ${date}
-                </div>
-            `;
-        }
-
-        function simulateEmergencyDemo() {
-            const message = document.querySelector('#emergency-demo input[placeholder="Message"]').value;
-            document.getElementById('emergency-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Emergency Notification Sent!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Message:</strong> ${message}
-                </div>
-            `;
-        }
-
+         // PTM Scheduling Demo Functions
         function togglePTMMode(mode) {
             document.getElementById('ptm-auto').style.display = mode === 'auto' ? 'block' : 'none';
             document.getElementById('ptm-manual').style.display = mode === 'manual' ? 'block' : 'none';
@@ -2431,103 +1819,97 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
         }
 
         function simulatePTMAutoDemo() {
-            const className = document.querySelector('#ptm-auto input[placeholder="Class"]').value;
-            const date = document.querySelector('#ptm-auto input[placeholder="PTM Date"]').value;
-            const num = parseInt(document.querySelector('#ptm-auto input[placeholder="Number of Students"]').value, 10);
+            const className = document.querySelector('#ptm-auto input[placeholder="9-B"]').value;
+            const date = document.querySelector('#ptm-auto input[type="date"]').value;
+            const num = parseInt(document.querySelector('#ptm-auto input[placeholder="30"]').value, 10);
             let slots = '';
-            for(let i=1;i<=num;i++) {
-                slots += `Parent ${i}: ${date} - ${(9+i)}:00 AM\n`;
+            for(let i=1;i<=Math.min(num, 5);i++) { // Simulate slots for up to 5 students for preview
+                const hour = 9 + i;
+                slots += `Parent ${i} (${className}): ${date} - ${hour < 10 ? '0' + hour : hour}:00 AM\n`;
             }
+            if (num > 5) slots += `... and ${num - 5} more slots.\n`;
+
             document.getElementById('ptm-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ PTM Auto-Scheduled!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Class:</strong> ${className}<br>
-                    <strong>Date:</strong> ${date}<br>
-                    <strong>Slots:</strong><br><pre style="background:none;border:none;margin:0;padding:0;font-family:inherit;">${slots}</pre>
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Automated PTM Scheduling Preview:</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    Dear Parents of <strong>${className}</strong> students,<br>
+                    PTM for your class is scheduled for ${date}. Please use the link below to book your preferred 10-minute slot:<br>
+                    <a href="#" target="_blank" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">https://eduno.example.com/ptm/book/${className}/${date}</a><br>
+                    <br>
+                    Example Slots Created:<br>
+                    <pre style="white-space: pre-wrap; margin: 8px 0; font-family: inherit;">${slots}</pre>
+                    <br>
+                    We look forward to discussing your child's progress.<br>
+                    <br>
+                    Regards,<br>
+                    [Class Teacher Name]
                 </div>
             `;
         }
 
         function simulatePTMManualDemo() {
-            const student = document.querySelector('#ptm-manual input[placeholder="Student Name"]').value;
-            const phone = document.querySelector('#ptm-manual input[placeholder="Parent Phone"]').value;
-            const date = document.querySelector('#ptm-manual input[placeholder="PTM Date"]').value;
-            const time = document.querySelector('#ptm-manual input[placeholder="Time"]').value;
+            const student = document.querySelector('#ptm-manual input[placeholder="Rajesh Kumar"]').value;
+            const phone = document.querySelector('#ptm-manual input[placeholder="+91-9876543210"]').value;
+            const date = document.querySelector('#ptm-manual input[type="date"]').value;
+            const time = document.querySelector('#ptm-manual input[type="time"]').value;
+
             document.getElementById('ptm-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ PTM Scheduled for Student!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Student:</strong> ${student}<br>
-                    <strong>Parent Phone:</strong> ${phone}<br>
-                    <strong>Date:</strong> ${date}<br>
-                    <strong>Time:</strong> ${time}
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Manual PTM Scheduling Preview:</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
+                    Dear Parent of <strong>${student}</strong>,<br>
+                    A Parent-Teacher Meeting has been scheduled for you on ${date} at ${time}.<br>
+                    Please reply to confirm your attendance.<br>
+                    <br>
+                    Regards,<br>
+                    [Teacher Name]
                 </div>
             `;
         }
 
-        document.getElementById('adminNoticeTarget').addEventListener('change', function() {
-            const val = this.value;
-            const classInput = document.getElementById('adminNoticeClass');
-            classInput.style.display = (val === 'class' || val === 'candidates') ? '' : 'none';
-        });
-
-        // Add new functions for Syllabus Planner
-        function toggleSyllabusMode(mode) {
-            document.getElementById('create-plan').style.display = mode === 'create' ? 'block' : 'none';
-            document.getElementById('view-alerts').style.display = mode === 'alerts' ? 'block' : 'none';
-            document.getElementById('create-plan-tab').classList.toggle('active', mode === 'create');
-            document.getElementById('view-alerts-tab').classList.toggle('active', mode === 'alerts');
-        }
-
-        function createYearlyPlan() {
-            const year = document.querySelector('#create-plan input[placeholder="Academic Year"]').value;
-            const term = document.getElementById('termSelect').value;
-            
-            document.getElementById('syllabus-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Yearly Plan Created & Alerts Scheduled!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
-                    <strong>Academic Year:</strong> ${year}<br>
-                    <strong>Term:</strong> ${term}<br><br>
-                    <strong>📢 Teacher Alerts Scheduled:</strong><br>
-                    • Weekly topic reminders to all teachers<br>
-                    • Daily preparation tips<br>
-                    • Progress tracking notifications<br>
-                    • Resource sharing alerts<br><br>
-                    <strong>Next Alert:</strong> Week 1 topics (April 1-7)
+        // Emergency Notification Demo Function
+        function simulateEmergencyDemo() {
+            const message = document.querySelector('#emergency-demo input[placeholder="School will be closed tomorrow due to heavy rain."]').value;
+            document.getElementById('emergency-results').innerHTML = `
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Emergency Notification Preview:</h4>
+                <div style="background: #fef0f0; padding: 15px; border-radius: 8px; border-left: 4px solid var(--danger-red); word-break: break-word;">
+                    <strong>🚨 EMERGENCY ALERT 🚨</strong><br>
+                    ${message}<br>
+                    Please stay safe.<br>
+                    <br>
+                    Regards,<br>
+                    [Your School Name]
                 </div>
-                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
-                    Teachers will receive automated alerts about topics to cover, resources needed, and preparation tips
-                </p>
             `;
         }
 
-        // Enhanced Student Manager Demo Data
+        // Enhanced Student Manager Demo Data (Simplified for demo)
         const demoStudents = [
-            { name: 'Rajesh Kumar', roll: '1001', class: '9-B', gender: 'Male', dob: '2010-05-12', parentName: 'Suresh Kumar', parent: '+91-9876543210', address: '123 Main St', status: 'Active', totalFees: 25000, paidFees: 20000, outstandingFees: 5000, lastPayment: '2025-05-01' },
-            { name: 'Priya Sharma', roll: '1002', class: '10-A', gender: 'Female', dob: '2009-08-20', parentName: 'Anita Sharma', parent: '+91-9876543211', address: '456 Park Ave', status: 'Active', totalFees: 28000, paidFees: 28000, outstandingFees: 0, lastPayment: '2025-05-10' },
-            { name: 'Amit Patel', roll: '1003', class: '8-C', gender: 'Male', dob: '2011-01-15', parentName: 'Ramesh Patel', parent: '+91-9876543212', address: '789 Lake Rd', status: 'Inactive', totalFees: 22000, paidFees: 15000, outstandingFees: 7000, lastPayment: '2025-04-20' },
-            { name: 'Sneha Reddy', roll: '1004', class: '9-B', gender: 'Female', dob: '2010-11-02', parentName: 'Sunita Reddy', parent: '+91-9876543213', address: '321 Hill St', status: 'Active', totalFees: 25000, paidFees: 25000, outstandingFees: 0, lastPayment: '2025-05-05' },
-            { name: 'Rohit Singh', roll: '1005', class: '10-A', gender: 'Male', dob: '2009-03-30', parentName: 'Vijay Singh', parent: '+91-9876543214', address: '654 River Ln', status: 'Alumni', totalFees: 27000, paidFees: 27000, outstandingFees: 0, lastPayment: '2024-12-15' },
+            { id: 1, name: 'Rajesh Kumar', roll: '1001', class: '9-B', gender: 'Male', dob: '2010-05-12', parentName: 'Suresh Kumar', parent: '+91-9876543210', address: '123 Main St, City', status: 'Active', totalFees: 25000, paidFees: 20000, outstandingFees: 5000, lastPayment: '2025-05-01' },
+            { id: 2, name: 'Priya Sharma', roll: '1002', class: '10-A', gender: 'Female', dob: '2009-08-20', parentName: 'Anita Sharma', parent: '+91-9876543211', address: '456 Park Ave, Town', status: 'Active', totalFees: 28000, paidFees: 28000, outstandingFees: 0, lastPayment: '2025-05-10' },
+            { id: 3, name: 'Amit Patel', roll: '1003', class: '8-C', gender: 'Male', dob: '2011-01-15', parentName: 'Ramesh Patel', parent: '+91-9876543212', address: '789 Lake Rd, Village', status: 'Inactive', totalFees: 22000, paidFees: 15000, outstandingFees: 7000, lastPayment: '2025-04-20' },
+             { id: 4, name: 'Sneha Reddy', roll: '1004', class: '9-B', gender: 'Female', dob: '2010-11-02', parentName: 'Sunita Reddy', parent: '+91-9876543213', address: '321 Hill St, Suburb', status: 'Active', totalFees: 25000, paidFees: 25000, outstandingFees: 0, lastPayment: '2025-05-05' },
+             { id: 5, name: 'Rohit Singh', roll: '1005', class: '10-A', gender: 'Male', dob: '2009-03-30', parentName: 'Vijay Singh', parent: '+91-9876543214', address: '654 River Ln, District', status: 'Alumni', totalFees: 27000, paidFees: 27000, outstandingFees: 0, lastPayment: '2024-12-15' },
         ];
-        let editingStudentIdx = null;
+        let editingStudentId = null;
 
         function renderStudentList(filter = '') {
             const list = document.getElementById('studentList');
-            let filtered = demoStudents.filter(s =>
+            const filtered = demoStudents.filter(s =>
                 s.name.toLowerCase().includes(filter.toLowerCase()) ||
                 s.class.toLowerCase().includes(filter.toLowerCase())
             );
             if (filtered.length === 0) {
-                list.innerHTML = '<div style="color:#c53030;">No students found.</div>';
+                list.innerHTML = '<div style="color: var(--danger-red);">No students found.</div>';
                 return;
             }
-            list.innerHTML = filtered.map((s, i) => `
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
-                    <span style="flex:2;cursor:pointer;color:#2b6cb0;font-weight:500;" onclick="openStudentEdit(${i})">${s.name} (${s.class})</span>
+            list.innerHTML = filtered.map(s => `
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap; padding: 8px; background: white; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <span style="flex:2;cursor:pointer;color: var(--dark-blue);font-weight:600;" onclick="openStudentEdit(${s.id})">${s.name} (${s.class})</span>
                     <span style="flex:1;">Roll: ${s.roll || '-'}</span>
                     <span style="flex:2;">${s.parent}</span>
                     <span style="flex:1;"><span style="padding:3px 8px;border-radius:8px;background:${s.status==='Active'?'#c6f6d5':s.status==='Inactive'?'#fed7d7':'#e2e8f0'};color:${s.status==='Active'?'#2f855a':s.status==='Inactive'?'#c53030':'#4a5568'};font-size:0.9em;">${s.status}</span></span>
-                    <span style="flex:1;">Outstanding: <span style="color:${s.outstandingFees>0?'#c53030':'#2f855a'};font-weight:600;">₹${s.outstandingFees}</span></span>
-                    <button style="flex:0;background:#667eea;color:white;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:0.9em;" onclick="openStudentEdit(${i})">Edit</button>
+                    <span style="flex:1;">Outstanding: <span style="color:${s.outstandingFees>0?'var(--danger-red)':'var(--success-green)'};font-weight:600;">₹${s.outstandingFees}</span></span>
+                    <button class="btn" style="flex:0; background: var(--primary-blue); color: white; border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 0.8em;" onclick="openStudentEdit(${s.id})">Edit</button>
                 </div>
             `).join('');
         }
@@ -2537,9 +1919,10 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
             renderStudentList(val);
         }
 
-        function openStudentEdit(idx) {
-            editingStudentIdx = idx;
-            const s = demoStudents[idx];
+        function openStudentEdit(id) {
+            editingStudentId = id;
+            const s = demoStudents.find(student => student.id === id);
+            if (!s) return;
             document.getElementById('editName').value = s.name;
             document.getElementById('editRoll').value = s.roll || '';
             document.getElementById('editClass').value = s.class;
@@ -2560,6 +1943,7 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
         function closeStudentEdit() {
             document.getElementById('studentEditModal').style.display = 'none';
             document.body.style.overflow = '';
+             editingStudentId = null; // Reset editing state
         }
 
         document.getElementById('editPaidFees').addEventListener('input', function() {
@@ -2575,8 +1959,12 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
 
         document.getElementById('studentEditForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            if (editingStudentIdx === null) return;
-            const s = demoStudents[editingStudentIdx];
+            if (editingStudentId === null) return;
+
+            const studentIndex = demoStudents.findIndex(student => student.id === editingStudentId);
+            if (studentIndex === -1) return; // Should not happen
+
+            const s = demoStudents[studentIndex];
             s.name = document.getElementById('editName').value;
             s.roll = document.getElementById('editRoll').value;
             s.class = document.getElementById('editClass').value;
@@ -2590,31 +1978,68 @@ Rohit Singh,+91-9876543254,2500,2025-06-15`;
             s.paidFees = parseInt(document.getElementById('editPaidFees').value) || 0;
             s.outstandingFees = parseInt(document.getElementById('editOutstandingFees').value) || 0;
             s.lastPayment = document.getElementById('editLastPayment').value;
-            renderStudentList(document.getElementById('studentSearch').value);
+
+            renderStudentList(document.getElementById('studentSearch').value); // Re-render list with potentially updated search filter
             document.getElementById('studentmanager-results').innerHTML = `
-                <h4 style="color: #2f855a; margin-bottom: 10px;">✅ Student Updated!</h4>
-                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #38a169;">
+                <h4 style="color: var(--success-green); margin-bottom: 10px;">✅ Student Updated! (Simulation)</h4>
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success-green); word-break: break-word;">
                     <strong>Name:</strong> ${s.name}<br>
-                    <strong>Roll No:</strong> ${s.roll}<br>
+                    <strong>Roll No:</strong> ${s.roll || '-'}<br>
                     <strong>Class:</strong> ${s.class}<br>
-                    <strong>Parent:</strong> ${s.parentName} (${s.parent})<br>
+                    <strong>Parent:</strong> ${s.parentName || '-'} (${s.parent})<br>
                     <strong>Status:</strong> ${s.status}<br>
-                    <strong>Address:</strong> ${s.address}<br>
-                    <strong>DOB:</strong> ${s.dob}<br>
-                    <strong>Gender:</strong> ${s.gender}<br>
+                    <strong>Address:</strong> ${s.address || '-'}<br>
+                    <strong>DOB:</strong> ${s.dob || '-'}<br>
+                    <strong>Gender:</strong> ${s.gender || '-'}<br>
                     <strong>Total Fees:</strong> ₹${s.totalFees}<br>
                     <strong>Paid:</strong> ₹${s.paidFees}<br>
                     <strong>Outstanding:</strong> ₹${s.outstandingFees}<br>
-                    <strong>Last Payment:</strong> ${s.lastPayment}
+                    <strong>Last Payment:</strong> ${s.lastPayment || '-'}
                 </div>
             `;
             closeStudentEdit();
         });
 
-        // Render initial student list on load
-        window.addEventListener('DOMContentLoaded', () => {
-            renderStudentList();
-        });
+
+        // Keep Demo Interface functional
+
+         // This function is now controlled by showDemo tabs
+        /*
+        function toggleFeeMode(mode) {
+            document.getElementById('single-entry').style.display = mode === 'single' ? 'grid' : 'none';
+            document.getElementById('bulk-entry').style.display = mode === 'bulk' ? 'block' : 'none';
+            document.getElementById('single-tab').classList.toggle('active', mode === 'single');
+            document.getElementById('bulk-tab').classList.toggle('active', mode === 'bulk');
+            document.getElementById('fee-results').innerHTML = 'Choose Single Entry or Bulk Upload to see automated message previews';
+        }
+        */
+
+         // This function is now controlled by showDemo tabs
+        /*
+        function toggleSyllabusMode(mode) {
+            document.getElementById('create-plan').style.display = mode === 'create' ? 'block' : 'none';
+            document.getElementById('view-alerts').style.display = mode === 'alerts' ? 'block' : 'none';
+            document.getElementById('create-plan-tab').classList.toggle('active', mode === 'create');
+            document.getElementById('view-alerts-tab').classList.toggle('active', mode === 'alerts');
+             document.getElementById('syllabus-results').innerHTML = mode === 'create' ? 'Create a yearly plan to see how teachers receive automated topic alerts' : 'View upcoming teacher alerts simulation';
+        }
+        */
+
+         // This function is now controlled by showDemo tabs
+        /*
+        function togglePTMMode(mode) {
+            document.getElementById('ptm-auto').style.display = mode === 'auto' ? 'block' : 'none';
+            document.getElementById('ptm-manual').style.display = mode === 'manual' ? 'block' : 'none';
+            document.getElementById('ptm-auto-tab').classList.toggle('active', mode === 'auto');
+            document.getElementById('ptm-manual-tab').classList.toggle('active', mode === 'manual');
+            document.getElementById('ptm-results').innerHTML = 'Choose mode and fill the form, then click to see the preview';
+        }
+         */
+
+
+        // Remove old, conflicting functions or references if necessary
+        // For example, the original submitContactForm is no longer needed as the CTA buttons link directly
+
     </script>
 </body>
 </html>

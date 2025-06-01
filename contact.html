@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us – Eduno</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e2e8f0 0%, #f7fafc 100%);
+            color: #2d3748;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 40px 30px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #2a4365;
+        }
+        p {
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        textarea {
+            min-height: 90px;
+        }
+        button {
+            width: 100%;
+            padding: 15px 0;
+            background: linear-gradient(135deg, #4299e1 0%, #2b6cb0 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #4299e1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav style="width:100%;background:rgba(255,255,255,0.95);box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:18px 0 16px 0;position:sticky;top:0;z-index:100;">
+      <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+        <div style="font-weight:800;font-size:1.5rem;letter-spacing:1px;color:#2a4365;display:flex;align-items:center;gap:8px;">
+          <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+            <span style="background:linear-gradient(135deg,#4299e1,#2b6cb0);color:white;padding:4px 14px;border-radius:8px;">EDUNO</span>
+            <span style="color:#4299e1;font-size:1.2rem;">•</span>
+          </a>
+        </div>
+        <div style="display:flex;gap:32px;align-items:center;">
+          <a href="ecosystem.html" style="font-weight:600;color:#2a4365;text-decoration:none;font-size:1.05rem;transition:color 0.2s;">Ecosystem</a>
+          <a href="about.html" style="font-weight:600;color:#2a4365;text-decoration:none;font-size:1.05rem;transition:color 0.2s;">About Us</a>
+          <a href="contact.html" style="font-weight:600;color:#2a4365;text-decoration:none;font-size:1.05rem;transition:color 0.2s;">Contact Us</a>
+          <a href="contact.html" class="hero-cta-btn primary" style="padding:8px 20px;font-size:0.95rem;background:#4299e1;color:white;border-radius:8px;text-decoration:none;font-weight:600;">Book Free Demo</a>
+        </div>
+      </div>
+    </nav>
+    <!-- Hero Banner -->
+    <section style="background:linear-gradient(135deg,#1a365d 0%,#2c5282 100%);color:white;padding:70px 0 40px 0;text-align:center;">
+      <div style="max-width:700px;margin:0 auto;padding:0 24px;">
+        <h1 style="font-size:2.7rem;font-weight:800;margin-bottom:18px;color:#fff;">Book Your Free Demo</h1>
+        <p style="font-size:1.2rem;color:#fff;margin-bottom:0;">See Eduno in action! Fill out the form below and our team will reach out to schedule a personalized walkthrough or answer your questions. We're excited to help your school get smarter, faster, and more connected.</p>
+      </div>
+    </section>
+    <div class="container">
+        <form id="contactForm" onsubmit="submitContactForm(event)">
+            <div class="form-group">
+                <label>School Name</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>Contact Person</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" required>
+            </div>
+            <div class="form-group">
+                <label>Number of Students</label>
+                <input type="number" required>
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+    <script>
+        function submitContactForm(event) {
+            event.preventDefault();
+            alert('Thank you for contacting us! Our team will reach out to you soon.');
+            document.getElementById('contactForm').reset();
+        }
+    </script>
+</body>
+</html> 

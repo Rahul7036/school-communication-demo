@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Eduno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .nav {
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 18px 0 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .nav-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #2a4365;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            background: linear-gradient(135deg, #4299e1, #2b6cb0);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: #2a4365;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #4299e1;
+        }
+
+        .cta-button {
+            background: #4299e1;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #2b6cb0;
+            transform: translateY(-2px);
+        }
+
+        .about-hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .about-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-card h3 {
+            color: #2b6cb0;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .about-card p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .mission-vision {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .mission-vision h2 {
+            color: #2d3748;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .mission-box, .vision-box {
+            padding: 30px;
+            border-radius: 15px;
+            background: #f7fafc;
+        }
+
+        .mission-box h3, .vision-box h3 {
+            color: #2b6cb0;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .team-section {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .team-section h2 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            color: #2d3748;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .team-member p {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .team-member .role {
+            color: #4299e1;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .mission-vision-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <span>EDUNO</span>
+                <span style="color:#4299e1;font-size:1.2rem;">•</span>
+            </a>
+            <div class="nav-links">
+                <a href="ecosystem.html" class="nav-link">Ecosystem</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+                <a href="contact.html" class="cta-button">Book Free Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>Our Story</h1>
+            <p>Empowering educational institutions with smarter, more connected management solutions. Committed to enabling smarter, connected school ecosystems through visionary leadership.</p>
+        </div>
+    </section>
+
+    <!-- Main About Content -->
+    <section class="about-content">
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Our Mission</h3>
+                <p>To revolutionize school management by providing innovative, user-friendly solutions that enhance communication, streamline operations, and foster better learning environments.</p>
+            </div>
+            <div class="about-card">
+                <h3>Our Vision</h3>
+                <p>To be the leading platform that transforms how schools operate, making quality education more accessible and efficient through technology.</p>
+            </div>
+            <div class="about-card">
+                <h3>Our Values</h3>
+                <p>Innovation, integrity, and impact drive everything we do. We believe in creating solutions that make a real difference in education.</p>
+            </div>
+        </div>
+
+        <div class="mission-vision">
+            <h2>Why Choose Eduno?</h2>
+            <div class="mission-vision-grid">
+                <div class="mission-box">
+                    <h3>Innovation First</h3>
+                    <p>We constantly evolve our platform with cutting-edge features that address real challenges in school management.</p>
+                </div>
+                <div class="vision-box">
+                    <h3>User-Centric Design</h3>
+                    <p>Our solutions are built with schools in mind, ensuring intuitive interfaces and seamless experiences.</p>
+                </div>
+                <div class="mission-box">
+                    <h3>Reliable Support</h3>
+                    <p>Dedicated support team available to help schools maximize the benefits of our platform.</p>
+                </div>
+            </div>
+        </div>
+        <!-- 1-Year Roadmap Section -->
+        <section class="roadmap-section" style="max-width:1000px;margin:60px auto 0 auto;padding:0 24px;">
+            <h2 style="font-size:2rem;color:#2a4365;text-align:center;margin-bottom:30px;">Our 1-Year Roadmap</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;">
+                <div style="background:white;border-radius:16px;box-shadow:0 4px 16px rgba(66,153,225,0.07);padding:28px 22px;text-align:center;">
+                    <h3 style="color:#4299e1;font-size:1.2rem;margin-bottom:10px;">Q3 2025</h3>
+                    <ul style="color:#4a5568;font-size:1rem;line-height:1.7;text-align:left;margin:0 auto;max-width:220px;">
+                        <li>Launch Eduno platform in pilot schools</li>
+                        <li>Onboard first 10+ institutions</li>
+                        <li>Gather feedback for rapid improvement</li>
+                    </ul>
+                </div>
+                <div style="background:white;border-radius:16px;box-shadow:0 4px 16px rgba(66,153,225,0.07);padding:28px 22px;text-align:center;">
+                    <h3 style="color:#4299e1;font-size:1.2rem;margin-bottom:10px;">Q4 2025</h3>
+                    <ul style="color:#4a5568;font-size:1rem;line-height:1.7;text-align:left;margin:0 auto;max-width:220px;">
+                        <li>Expand to 50+ schools</li>
+                        <li>Release mobile app for teachers & parents</li>
+                        <li>Integrate advanced analytics dashboard</li>
+                    </ul>
+                </div>
+                <div style="background:white;border-radius:16px;box-shadow:0 4px 16px rgba(66,153,225,0.07);padding:28px 22px;text-align:center;">
+                    <h3 style="color:#4299e1;font-size:1.2rem;margin-bottom:10px;">Q1 2026</h3>
+                    <ul style="color:#4a5568;font-size:1rem;line-height:1.7;text-align:left;margin:0 auto;max-width:220px;">
+                        <li>AI-powered insights for school leaders</li>
+                        <li>Automated parent engagement tools</li>
+                        <li>Smart attendance & fee collection modules</li>
+                    </ul>
+                </div>
+                <div style="background:white;border-radius:16px;box-shadow:0 4px 16px rgba(66,153,225,0.07);padding:28px 22px;text-align:center;">
+                    <h3 style="color:#4299e1;font-size:1.2rem;margin-bottom:10px;">Q2 2026</h3>
+                    <ul style="color:#4a5568;font-size:1rem;line-height:1.7;text-align:left;margin:0 auto;max-width:220px;">
+                        <li>Transform 100+ schools into smart, connected campuses</li>
+                        <li>Launch community & training programs</li>
+                        <li>Continuous innovation based on school feedback</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align:center;color:#2a4365;font-size:1.1rem;margin-top:36px;max-width:700px;margin-left:auto;margin-right:auto;">Our mission: By next year, empower 100+ schools to become the smartest, most connected institutions in the region—driven by technology, community, and a passion for better education.</p>
+        </section>
+    </section>
+</body>
+</html> 
