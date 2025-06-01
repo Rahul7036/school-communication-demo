@@ -155,43 +155,98 @@
         @media (max-width: 768px) {
              .nav-content {
                  flex-direction: column;
-                 gap: 12px;
+                 gap: 15px; /* Increased gap */
+                 padding: 10px 20px; /* Added padding */
              }
              .nav-links {
-                 gap: 18px;
+                 width: 100%; /* Make links take full width */
+                 flex-direction: column; /* Stack links vertically */
+                 gap: 15px; /* Increased gap between stacked links */
+                 align-items: stretch; /* Stretch links to fill width */
+             }
+             .nav-link {
+                 font-size: 1rem; /* Slightly larger font for readability */
+                 padding: 10px 0; /* Add vertical padding */
+                 text-align: center; /* Center link text */
+                 border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Add separator line */
+             }
+             .nav-link:last-child {
+                 border-bottom: none; /* Remove bottom border from last link */
+             }
+             .cta-button {
+                 width: 100%; /* Make button full width */
+                 text-align: center; /* Center button text */
+                 padding: 12px; /* Increase padding */
+                 font-size: 1rem; /* Match link font size */
+                 margin-top: 5px; /* Add some space above button */
              }
              .nav-brand {
                  font-size: 1.4rem;
-             }
-             .nav-link {
-                 font-size: 0.95rem;
-             }
-             .cta-button {
-                 font-size: 0.9rem;
-                 padding: 8px 16px;
+                 width: 100%; /* Make brand full width to center */
+                 justify-content: center; /* Center the brand content */
              }
         }
 
         @media (max-width: 480px) {
              .nav-content {
-                 padding: 0 12px;
+                 padding: 8px 15px; /* Adjust padding for smaller mobile */
              }
              .nav-brand {
                  font-size: 1.2rem;
              }
              .nav-brand span {
-                 padding: 3px 10px;
+                 padding: 4px 12px;
              }
              .nav-links {
-                 gap: 12px;
+                 gap: 12px; /* Adjust gap for smaller mobile */
              }
              .nav-link {
-                 font-size: 0.9rem;
+                 font-size: 0.95rem; /* Adjust font size */
+                 padding: 12px 0; /* Adjust padding */
              }
              .cta-button {
-                 font-size: 0.85rem;
-                 padding: 6px 12px;
+                 font-size: 0.95rem; /* Adjust font size */
+                 padding: 12px; /* Adjust padding */
              }
+            /* Adjust padding and font size for other sections on very small screens */
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 0.9rem; }
+            .hero-ctas .btn { font-size: 0.85rem; padding: 8px 15px; gap: 5px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 15px; }
+            .stat-card { padding: 15px; }
+            .stat-number { font-size: 1.4rem; }
+            .stat-label { font-size: 0.7rem; }
+            .section { padding: 40px 0; }
+            .section-header { margin-bottom: 40px; }
+            .section-header h2 { font-size: 1.8rem; }
+            .section-header p { font-size: 0.9rem; }
+            .feature-card, .demo-feature-card { padding: 20px; }
+            .feature-card h3, .demo-feature-card h3 { font-size: 1.1rem; }
+            .feature-card p, .demo-feature-card p { font-size: 0.9rem; }
+            .problem-box, .solution-box { padding: 20px; }
+            .problem-box h3, .solution-box h3 { font-size: 1.1rem; }
+            .problem-box li, .solution-box li { font-size: 0.9rem; }
+            .demo-interface-container { padding: 15px; }
+            .demo-tabs { gap: 8px; padding: 0 5px; flex-wrap: wrap;}
+            .demo-tab { padding: 10px 15px; font-size: 0.85rem; min-width: 100px; flex: 1 1 auto;} /* Added flex properties */
+            .demo-form-grid { gap: 10px; }
+            .form-group { margin-bottom: 12px; }
+            .form-input, .form-textarea { padding: 8px; font-size: 0.9rem; }
+            .form-textarea { min-height: 70px; }
+            /* Added Student List mobile styles */
+            #studentList > div { padding: 12px; flex-direction: column; gap: 8px; }
+            #studentList > div > span { width: 100%; margin-bottom: 4px; }
+            #studentList > div > button { width: 100%; margin-top: 8px; }
+            .dashboard-card { padding: 15px; }
+            .dashboard-title { font-size: 0.9rem; }
+            .dashboard-value { font-size: 1.4rem; }
+            .dashboard-trend { font-size: 0.8rem; }
+            .analytics-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } /* Changed to 2 columns */
+            .analytics-item h4 { font-size: 0.75rem; }
+            .analytics-item p { font-size: 1rem; }
+            .fee-item { font-size: 0.9rem; }
+            .fee-item .name, .fee-item .amount { font-size: 0.9rem; }
+            .fee-status { font-size: 0.7rem; }
         }
 
         .btn {
