@@ -258,6 +258,95 @@
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
         }
+
+        @media (max-width: 480px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px 20px;
+            }
+            .nav-links {
+                width: 100%;
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            .nav-link {
+                font-size: 1rem;
+                padding: 10px 0;
+                text-align: center;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+            .cta-button {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+                font-size: 1rem;
+                margin-top: 5px;
+            }
+            .nav-brand {
+                font-size: 1.4rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                padding: 40px 20px;
+            }
+
+            .about-grid, .mission-vision-grid, .team-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-card, .mission-box, .vision-box, .team-member {
+                padding: 20px;
+            }
+
+            .about-card h3, .mission-box h3, .vision-box h3 {
+                font-size: 1.2rem;
+            }
+
+            .team-member img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .team-member h3 {
+                font-size: 1.1rem;
+            }
+
+            .team-member .role, .team-member p {
+                font-size: 0.85rem;
+            }
+
+            .mission-vision {
+                padding: 20px;
+            }
+            .mission-vision h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .team-section {
+                margin: 40px 0;
+            }
+            .team-section h2 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -269,6 +358,7 @@
                 <span style="color:#4299e1;font-size:1.2rem;">•</span>
             </a>
             <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
                 <a href="ecosystem.html" class="nav-link">Ecosystem</a>
                 <a href="about.html" class="nav-link">About Us</a>
                 <a href="contact.html" class="nav-link">Contact Us</a>

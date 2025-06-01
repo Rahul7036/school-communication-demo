@@ -79,23 +79,183 @@
         .back-link:hover {
             text-decoration: underline;
         }
+
+        /* Added mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                margin: 40px 20px;
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            p {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            input, textarea {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            button {
+                padding: 12px 0;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 30px 15px;
+                padding: 25px 15px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            label {
+                font-size: 0.9rem;
+            }
+            input, textarea {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            button {
+                padding: 10px 0;
+                font-size: 0.95rem;
+            }
+            .back-link {
+                font-size: 0.9rem;
+                margin-top: 20px;
+            }
+        }
+
+         /* Navigation Styles for responsiveness */
+        .nav-content {
+             max-width: 1200px;
+             margin: 0 auto;
+             display: flex;
+             align-items: center;
+             justify-content: space-between;
+             padding: 0 24px;
+         }
+
+         .nav-brand {
+             font-weight: 800;
+             font-size: 1.5rem;
+             letter-spacing: 1px;
+             color: #2a4365;
+             display: flex;
+             align-items: center;
+             gap: 8px;
+             text-decoration: none;
+         }
+
+         .nav-brand span {
+             background: linear-gradient(135deg, #4299e1, #2b6cb0);
+             color: white;
+             padding: 4px 14px;
+             border-radius: 8px;
+         }
+
+         .nav-links {
+             display: flex;
+             gap: 32px;
+             align-items: center;
+         }
+
+         .nav-link {
+             font-weight: 600;
+             color: #2a4365;
+             text-decoration: none;
+             font-size: 1.05rem;
+             transition: color 0.2s;
+         }
+
+         .nav-link:hover {
+             color: #4299e1;
+         }
+
+         .cta-button {
+             background: #4299e1;
+             color: white;
+             padding: 8px 20px;
+             border-radius: 8px;
+             text-decoration: none;
+             font-size: 0.95rem;
+             font-weight: 600;
+             transition: all 0.3s ease;
+         }
+
+         .cta-button:hover {
+             background: #2b6cb0;
+             transform: translateY(-2px);
+         }
+
+         @media (max-width: 768px) {
+             .nav-links {
+                 gap: 20px;
+             }
+             .nav-brand {
+                 font-size: 1.4rem;
+             }
+         }
+
+         @media (max-width: 480px) {
+              .nav-content {
+                  flex-direction: column;
+                  gap: 15px;
+                  padding: 10px 20px;
+              }
+              .nav-links {
+                  width: 100%;
+                  flex-direction: column;
+                  gap: 15px;
+                  align-items: stretch;
+              }
+              .nav-link {
+                  font-size: 1rem;
+                  padding: 10px 0;
+                  text-align: center;
+                  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              }
+              .nav-link:last-child {
+                  border-bottom: none;
+              }
+              .cta-button {
+                  width: 100%;
+                  text-align: center;
+                  padding: 12px;
+                  font-size: 1rem;
+                  margin-top: 5px;
+              }
+              .nav-brand {
+                  font-size: 1.4rem;
+                  width: 100%;
+                  justify-content: center;
+              }
+         }
+
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav style="width:100%;background:rgba(255,255,255,0.95);box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:18px 0 16px 0;position:sticky;top:0;z-index:100;">
-      <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div class="nav-content">
         <div style="font-weight:800;font-size:1.5rem;letter-spacing:1px;color:#2a4365;display:flex;align-items:center;gap:8px;">
-          <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+          <a href="index.html" class="nav-brand">
             <span style="background:linear-gradient(135deg,#4299e1,#2b6cb0);color:white;padding:4px 14px;border-radius:8px;">EDUNO</span>
             <span style="color:#4299e1;font-size:1.2rem;">•</span>
           </a>
         </div>
-        <div style="display:flex;gap:32px;align-items:center;">
-          <a href="ecosystem.html" style="font-weight:600;color:#2a4365;text-decoration:none;font-size:1.05rem;transition:color 0.2s;">Ecosystem</a>
-          <a href="about.html" style="font-weight:600;color:#2a4365;text-decoration:none;font-size:1.05rem;transition:color 0.2s;">About Us</a>
-          <a href="contact.html" style="font-weight:600;color:#2a4365;text-decoration:none;font-size:1.05rem;transition:color 0.2s;">Contact Us</a>
-          <a href="contact.html" class="hero-cta-btn primary" style="padding:8px 20px;font-size:0.95rem;background:#4299e1;color:white;border-radius:8px;text-decoration:none;font-weight:600;">Book Free Demo</a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="ecosystem.html" class="nav-link">Ecosystem</a>
+          <a href="about.html" class="nav-link">About Us</a>
+          <a href="contact.html" class="nav-link">Contact Us</a>
+          <a href="contact.html" class="cta-button">Book Free Demo</a>
         </div>
       </div>
     </nav>
